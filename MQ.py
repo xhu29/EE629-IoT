@@ -48,14 +48,14 @@ def converttoppm(rs, conversions):
         if a[0][0] >= rsper > a[0][1]:
             mid, hi = rsper - a[0][0], a[0][1] - a[0][0]
             sf = float(mid) / hi
-            mg/L = sf * (a[1][1] - a[1][0]) + a[1][0]
-            return mg/L
+            ppm = sf * (a[1][1] - a[1][0]) + a[1][0]
+            return ppm
         return 0
 
 def get_Alcohol():
     rs = get_resistance(Alcohol_CHANNEL)
-    mg/L = converttoppm(rs, Alcohol_Conversions)
-    return mg/L
+    ppm = converttoppm(rs, Alcohol_Conversions)
+    return ppm
 
 #def get_CO():
 #    rs = get_resistance(CO_CHANNEL)
