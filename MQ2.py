@@ -1,7 +1,7 @@
 # adapted from sandboxelectronics.com/?p=165
 import time
 import math
-from MCP3008 import MCP3008
+
 
 class MQ():
 
