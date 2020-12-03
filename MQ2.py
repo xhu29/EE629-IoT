@@ -1,4 +1,4 @@
-# Obtained from https://github.com/tutRPi/Raspberry-Pi-Gas-Sensor-MQ/blob/master/mq.py
+# obtained from https://github.com/tutRPi/Raspberry-Pi-Gas-Sensor-MQ/blob/master/mq.py
 import time
 import math
 from MCP3008 import MCP3008
