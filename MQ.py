@@ -71,4 +71,4 @@ def runController():
 
 while True:
     runController()
-    time.sleep(15)
+    time.sleep(5)
