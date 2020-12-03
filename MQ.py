@@ -1,5 +1,5 @@
 # The original script was retrieved from https://github.com/kevinwlu/iot/tree/master/lesson3.
-# Modifications have been done by Xi Hu.
+# Proper modifications have been made by Xi Hu.
 import time
 import spidev
 
