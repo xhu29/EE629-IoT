@@ -14,7 +14,7 @@ Alcohol_CHANNEL = 0 #MQ3
 #CO2_CHANNEL = 7
 
 vin = 5
-r0 = 0.4 # It should be changed for different sensors.
+r0 = 0.4 # It should be changed properly for different sensors.
 pullup = 10000
 
 # Conversions based on Rs/Ro vs ppm plots of the sensors
