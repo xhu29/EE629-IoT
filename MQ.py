@@ -45,7 +45,7 @@ def get_resistance(channel):
     return resistance
 
 def converttoppm(rs, conversions):
-    rsper = float(rs) / r0
+    rsper = 100* (float(rs) / r0)
     for a in conversions:
         if a[0][0] >= rsper > a[0][1]:
             mid, hi = rsper - a[0][0], a[0][1] - a[0][0]
