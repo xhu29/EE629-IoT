@@ -1,3 +1,5 @@
+# The original script was retrieved from https://github.com/kevinwlu/iot/tree/master/lesson3.
+# Modifications have been done by Xi Hu.
 import time
 import spidev
 
@@ -12,11 +14,11 @@ Alcohol_CHANNEL = 0 #MQ3
 #CO2_CHANNEL = 7
 
 vin = 5
-r0 = 10000
+r0 = 0.4 # It should be changed for different sensors.
 pullup = 10000
 
 # Conversions based on Rs/Ro vs ppm plots of the sensors
-#CO_Conversions = [((0, 100), (0, 0.25)), ((100, 133), (0.25, 0.325)),
+# CO_Conversions = [((0, 100), (0, 0.25)), ((100, 133), (0.25, 0.325)),
 #    ((133, 167), (0.325, 0.475)), ((167, 200), (0.475, 0.575)),
 #    ((200, 233), (0.575, 0.665)), ((233, 267), (0.666, 0.75))]
 # Conversions based on Rs/Ro vs mg/L plots of the MQ3 gas sensor
@@ -43,7 +45,7 @@ def get_resistance(channel):
     return resistance
 
 def converttoppm(rs, conversions):
-    rsper = 100 * (float(rs) / r0)
+    rsper = float(rs) / r0
     for a in conversions:
         if a[0][0] >= rsper > a[0][1]:
             mid, hi = rsper - a[0][0], a[0][1] - a[0][0]
