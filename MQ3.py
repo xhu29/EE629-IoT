@@ -3,7 +3,7 @@ import smbus
 import time
 
 # Get I2C bus
-bus = smbus.SMBus(1)
+bus = smbus.SMBus(0)
 
 # ADC121C_MQ3 address, 0x50(80)
 # Read data back from 0x00(00), 2 bytes
