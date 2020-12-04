@@ -8,8 +8,8 @@ class MQ():
 
     ######################### Hardware Related Macros #########################
     MQ_PIN                       = 0        # define which analog input channel you are going to use (MCP3008)
-    RL_VALUE                     = 200      # define the load resistance on the board, in kilo ohms
-    RO_CLEAN_AIR_FACTOR          = 0.4      # RO_CLEAR_AIR_FACTOR=(Sensor resistance in clean air)/RO,
+    RL_VALUE                     = 5      # define the load resistance on the board, in kilo ohms
+    RO_CLEAN_AIR_FACTOR          =9.83     # RO_CLEAR_AIR_FACTOR=(Sensor resistance in clean air)/RO,
                                             # which is derived from the chart in datasheet
  
     ######################### Software Related Macros #########################
@@ -28,7 +28,7 @@ class MQ():
         self.MQ_PIN = analogPin
         self.adc = MCP3008()
         
-        self.AlcoholCurve = [-1,0.0792,-0.5]    # two points are taken from the curve. 
+        self.AlcoholCurve = [2.3,0.21,-0.47]    # two points are taken from the curve. 
                                             # with these two points, a line is formed which is "approximately equivalent"
                                             # to the original curve. 
                                             # data format:{ x, y, slope}; point1: (lg0.1, 0.0792), point2: (lg10, -0.9208) 
