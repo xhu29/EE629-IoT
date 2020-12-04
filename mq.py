@@ -69,7 +69,7 @@ class MQ():
         val = 0.0
         for i in range(self.CALIBARAION_SAMPLE_TIMES):          # take multiple samples
             val += self.MQResistanceCalculation(self.adc.read(mq_pin))
-            print("it is ok")
+            
             time.sleep(self.CALIBRATION_SAMPLE_INTERVAL/1000.0)
             
         val = val/self.CALIBARAION_SAMPLE_TIMES                 # calculate the average value
@@ -93,7 +93,7 @@ class MQ():
 
         for i in range(self.READ_SAMPLE_TIMES):
             rs += self.MQResistanceCalculation(self.adc.read(mq_pin))
-            print("it is ok")
+            
             time.sleep(self.READ_SAMPLE_INTERVAL/1000.0)
 
         rs = rs/self.READ_SAMPLE_TIMES
