@@ -88,11 +88,11 @@ class MQ():
     #          gas. The sample times and the time interval between samples could be configured
     #          by changing the definition of the macros.
     ############################################################################ 
-    def MQRead(self, mq_pin):
+    def MQRead(self,MQ_PIN):
         rs = 0.0
 
         for i in range(self.READ_SAMPLE_TIMES):
-            a=self.adc.read(mq_pin)
+            a=self.adc.read(MQ_PIN)
             print(a)
             rs += self.MQResistanceCalculation(a)
             
