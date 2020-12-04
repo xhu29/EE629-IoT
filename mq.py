@@ -68,7 +68,7 @@ class MQ():
     def MQCalibration(self, mq_pin):
         val = 0.0
         for i in range(self.CALIBARAION_SAMPLE_TIMES):          # take multiple samples
-            val += self.MQResistanceCalculation(self.adc.read(mq_pin))
+            val += self.MQResistanceCalculation(self.adc.read(MQ_pin))
             
             time.sleep(self.CALIBRATION_SAMPLE_INTERVAL/1000.0)
             
