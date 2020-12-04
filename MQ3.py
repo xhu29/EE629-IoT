@@ -15,4 +15,4 @@ raw_adc = (data[0] & 0x0F) * 256 + data[1]
 concentration = (9.95 / 4096.0) * raw_adc + 0.05
 
 # Output data to screen
-print "Alcohol Concentration : %.2f mg/l" #concentration
+print ("Alcohol Concentration : %.2f mg/L") #concentration
