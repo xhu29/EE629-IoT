@@ -92,8 +92,9 @@ class MQ():
         rs = 0.0
 
         for i in range(self.READ_SAMPLE_TIMES):
-            print(self.adc.read(mq_pin)
-            rs += self.MQResistanceCalculation(self.adc.read(mq_pin))
+            a=self.adc.read(mq_pin)
+            print(a)
+            rs += self.MQResistanceCalculation(a)
             
             time.sleep(self.READ_SAMPLE_INTERVAL/1000.0)
 
