@@ -65,7 +65,7 @@ class MQ():
     #          and then divides it with RO_CLEAN_AIR_FACTOR. RO_CLEAN_AIR_FACTOR is about 
     #          10, which differs slightly between different sensors.
     ############################################################################ 
-    def MQCalibration(self, mq_pin):
+    def MQCalibration(self,MQ_pin):
         val = 0.0
         for i in range(self.CALIBARAION_SAMPLE_TIMES):          # take multiple samples
             val += self.MQResistanceCalculation(self.adc.read(MQ_pin))
