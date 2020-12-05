@@ -11,7 +11,7 @@ try:
         sys.stdout.write("\033[K")
         #sys.stdout.write("Alcohol: %g ppm" % (perc["GAS_Alcohol"]))
         sys.stdout.flush()
-        time.sleep(3)
+        time.sleep(0.1)
 
 except:
     print("\nAbort by user")
