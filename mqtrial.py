@@ -20,8 +20,8 @@ def readMQ():
 
 # Controller main function
 def runController():
-    Concentration = readMQ()
-    print('Concentration={0:0.5f}'.format(Concentration))
+    level = readMQ()
+    print('Concentration={0:0.5f}'.format(level))
 
 while True:
     try:
