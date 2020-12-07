@@ -1,6 +1,6 @@
 import time
 import spidev
-channel = 0
+channel = 5
 
 # Open SPI bus
 spi = spidev.SpiDev()
@@ -21,7 +21,7 @@ def readMQ():
 # Controller main function
 def runController():
     level = readMQ()
-    print('Concentration={0:0.5f}'.format(level))
+    print('Concentration = {0:0.4f} ppm'.format(level))
 
 while True:
     try:
