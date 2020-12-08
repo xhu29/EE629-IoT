@@ -1,6 +1,6 @@
 import time
 import spidev
-channel = 0
+channel = 1
 
 # Open SPI bus
 spi = spidev.SpiDev()
