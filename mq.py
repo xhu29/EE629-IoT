@@ -64,17 +64,16 @@ class MQ():
     #          and then divides it with RO_CLEAN_AIR_FACTOR. RO_CLEAN_AIR_FACTOR is about 
     #          10, which differs slightly between different sensors.
     ############################################################################ 
-    def MQCalibration(self,MQ_PIN):
+    def MQCalibration(self,mq_pin):
         val = 0.0
         for i in range(self.CALIBARAION_SAMPLE_TIMES):          # take multiple samples
-            val += self.MQResistanceCalculation(self.adc.read(MQ_PIN)) 
+            val += self.MQResistanceCalculation(self.adc.read(mq_pin)) 
             time.sleep(self.CALIBRATION_SAMPLE_INTERVAL/1000.0)
             
         val = val/self.CALIBARAION_SAMPLE_TIMES                 # calculate the average value
 
         val = val/self.RO_CLEAN_AIR_FACTOR                      # divided by RO_CLEAN_AIR_FACTOR yields the Ro 
                                                                 # according to the chart in the datasheet 
-
         return val;
       
       
@@ -86,13 +85,12 @@ class MQ():
     #          gas. The sample times and the time interval between samples could be configured
     #          by changing the definition of the macros.
     ############################################################################ 
-    def MQRead(self,MQ_PIN):
+    def MQRead(self,mq_pin):
         rs = 0.0
 
         for i in range(self.READ_SAMPLE_TIMES):
-            a=self.adc.read(MQ_PIN)
-            print(a)
-            rs += self.MQResistanceCalculation(a)
+            
+            rs += self.MQResistanceCalculation(self.adc.read(mq_pin))
             
             time.sleep(self.READ_SAMPLE_INTERVAL/1000.0)
 
