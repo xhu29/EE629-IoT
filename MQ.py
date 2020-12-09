@@ -14,8 +14,8 @@ Alcohol_CHANNEL = 0 #MQ3
 #CO2_CHANNEL = 7
 
 vin = 5
-r0 = 200000 # It should be changed properly for different sensors.
-pullup = 10000
+R0 = 10000 # It should be changed properly for different sensors.
+RL = 200000
 
 # Conversions based on Rs/Ro vs ppm plots of the sensors
 # CO_Conversions = [((0, 100), (0, 0.25)), ((100, 133), (0.25, 0.325)),
@@ -42,11 +42,11 @@ def get_resistance(channel):
     if result == 0:
         resistance = 0
     else:
-        resistance = (vin/result -1) * pullup
+        resistance = (vin/result -1) * RL
     return resistance
 
 def converttoppm(rs, conversions):
-    rsper = 100* (float(rs) / r0) # The coefficient '100' may be fine-tuned properly.
+    rsper = 100* (float(rs) / R0) # The coefficient '100' may be fine-tuned properly.
     for a in conversions:
         if a[0][0] >= rsper > a[0][1]:
             mid, hi = rsper - a[0][0], a[0][1] - a[0][0]
