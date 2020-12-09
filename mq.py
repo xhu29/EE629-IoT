@@ -59,7 +59,7 @@ class MQ():
     ######################### MQCalibration ####################################
     # Input:   mq_pin - analog channel
     # Output:  Ro of the sensor
-    # Remarks: This function assumes that the sensor is in clean air. It use  
+    # Remarks: This function assumes that the sensor is in clean air. It uses  
     #          MQResistanceCalculation to calculates the sensor resistance in clean air 
     #          and then divides it with RO_CLEAN_AIR_FACTOR. RO_CLEAN_AIR_FACTOR is about 
     #          10, which differs slightly between different sensors.
@@ -80,7 +80,7 @@ class MQ():
     #########################  MQRead ##########################################
     # Input:   mq_pin - analog channel
     # Output:  Rs of the sensor
-    # Remarks: This function use MQResistanceCalculation to caculate the sensor resistenc (Rs).
+    # Remarks: This function use MQResistanceCalculation to caculate the sensor resistence (Rs).
     #          The Rs changes as the sensor is in the different consentration of the target
     #          gas. The sample times and the time interval between samples could be configured
     #          by changing the definition of the macros.
