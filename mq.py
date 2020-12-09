@@ -28,10 +28,10 @@ class MQ():
         self.MQ_PIN = analogPin
         self.adc = MCP3008()
         
-        self.AlcoholCurve = [-1,0.3424,-0.5]# two points are taken from the curve. 
-                                            # with these two points, a line is formed which is "approximately equivalent"
-                                            # to the original curve. 
-                                            # data format:{ x, y, slope}; point1: (lg0.1, 0.0792), point2: (lg10, -0.9208) 
+        self.AlcoholCurve = [-1,0.3424,-0.6316] # two points are taken from the curve. 
+                                                # with these two points, a line is formed which is "approximately equivalent"
+                                                # to the original curve. 
+                                                # data format:{ x, y, slope}; point1: (lg0.1, lg2.2), point2: (lg10, lg0.12) 
         
         print("Calibrating...")
         self.Ro = self.MQCalibration(self.MQ_PIN)
