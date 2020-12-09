@@ -23,7 +23,7 @@ class MQ():
     ######################### Application Related Macros ######################
     GAS_Alcohol                  = 0
 
-    def __init__(self, Ro=0.4, analogPin=0):
+    def __init__(self, Ro=10, analogPin=0):
         self.Ro = Ro
         self.MQ_PIN = analogPin
         self.adc = MCP3008()
