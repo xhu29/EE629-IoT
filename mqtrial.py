@@ -1,6 +1,6 @@
 import time
 import spidev
-channel = 1
+channel = 0 # Channel '0' is for MQ3(alcohol) gas sensor.
 
 # Open SPI bus
 spi = spidev.SpiDev()
@@ -20,17 +20,14 @@ def ReadChannel(channel):
 
 # Function to read sensor connected to MCP3008
 def readMQ():
-    level = ReadChannel(channel)
-#convert the reading based on the datasheet
-    
-    return level
-
-
-
+    Vout = ReadChannel(channel)
+    return Vout
+  
 # Controller main function
 def runController():
-    level = readMQ()
-    print('Concentration = {0:0.4f} ppm'.format(level))
+    Vout = readMQ()
+    Rs = RL*(Vin/Vout - 1)
+    print('Concentration = {0:0.4f} ppm'.format(Vout))
 
 while True:
     try:
