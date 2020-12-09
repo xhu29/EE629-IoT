@@ -28,7 +28,7 @@ class MQ():
         self.MQ_PIN = analogPin
         self.adc = MCP3008()
         
-        self.AlcoholCurve = [-1,0.0792,-0.5]# two points are taken from the curve. 
+        self.AlcoholCurve = [-1,0.3424,-0.5]# two points are taken from the curve. 
                                             # with these two points, a line is formed which is "approximately equivalent"
                                             # to the original curve. 
                                             # data format:{ x, y, slope}; point1: (lg0.1, 0.0792), point2: (lg10, -0.9208) 
