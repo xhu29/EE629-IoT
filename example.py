@@ -9,9 +9,9 @@ try:
         perc = mq.MQPercentage()
         sys.stdout.write("\r")
         sys.stdout.write("\033[K")
-        #sys.stdout.write("Alcohol: %g ppm" % (perc["GAS_Alcohol"]))
+        sys.stdout.write("Alcohol: %g ppm" % (perc["GAS_Alcohol"]))
         sys.stdout.flush()
-        time.sleep(0.1)
+        time.sleep(3)
 
 except:
     print("\nAbort by user")
