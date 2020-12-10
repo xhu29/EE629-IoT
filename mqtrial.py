@@ -10,9 +10,7 @@ spi.max_speed_hz = 976000
 # Define basic parameters of the sensor
 Vin = 5
 RL  = 200    # define the load resistance on the board, in kilo ohms
-RO_CLEAR_AIR_FACTOR  = 60     # RO_CLEAR_AIR_FACTOR=(Sensor resistance in clean air)/RO,
-             # which is derived from the chart in datashee
-# Function to read SPI data from MCP3008 chip
+RO = 10 #Assume that RO equals to 10. Theoretically, it should be gained by calibrating the sensor in clean air.
 def ReadChannel(channel):
     adc = spi.xfer2([1, (8+channel) << 4, 0])
     data = ((adc[1] & 3) << 8) + adc[2]
@@ -27,7 +25,7 @@ def readMQ():
 def runController():
     Vout = readMQ()
     Rs = RL*(Vin*1023/Vout - 1)
-    print('Concentration = {0:0.4f} ppm'.format(Vout), 'Resistance = {0:0.4f} kohm'.format(Rs))
+    print('Concentration = {0:0.4f} ppm'.format(Vout), 'Rs = {0:0.4f} kohm'.format(Rs))
     
 
 while True:
