@@ -10,7 +10,7 @@ spi.max_speed_hz = 976000
 # Define basic parameters of the sensor
 Vin = 5
 RL  = 200    # define the load resistance on the board, in kilo ohms
-RO  = 10     # RO_CLEAR_AIR_FACTOR=(Sensor resistance in clean air)/RO,
+RO_CLEAR_AIR_FACTOR  = 60     # RO_CLEAR_AIR_FACTOR=(Sensor resistance in clean air)/RO,
              # which is derived from the chart in datashee
 # Function to read SPI data from MCP3008 chip
 def ReadChannel(channel):
