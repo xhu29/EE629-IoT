@@ -31,6 +31,6 @@ def runController():
 while True:
     try:
         runController()
-        time.sleep(5)
+        time.sleep(3)
     except KeyboardInterrupt:
         exit()
