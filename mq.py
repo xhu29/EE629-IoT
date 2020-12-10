@@ -4,121 +4,118 @@ import time
 import math
 from MCP3008 import MCP3008
 
-class MQ():
 
+class MQ:
     ######################### Hardware Related Macros #########################
-    MQ_PIN                       = 0        # define which analog input channel you are going to use (MCP3008)
-    RL_VALUE                     = 200      # define the load resistance on the board, in kilo ohms
-    RO_CLEAN_AIR_FACTOR          = 10     # RO_CLEAR_AIR_FACTOR=(Sensor resistance in clean air)/RO,
-                                            # which is derived from the chart in datasheet
- 
-    ######################### Software Related Macros #########################
-    CALIBARAION_SAMPLE_TIMES     = 50       # define how many samples you are going to take in the calibration phase
-    CALIBRATION_SAMPLE_INTERVAL  = 500      # define the time interval(in milisecond) between each samples in the
-                                            # cablibration phase
-    READ_SAMPLE_INTERVAL         = 50       # define the time interval(in milisecond) between each samples in
-    READ_SAMPLE_TIMES            = 5        # define how many samples you are going to take in normal operation 
-                                            # normal operation
- 
-    ######################### Application Related Macros ######################
-    GAS_Alcohol                  = 0
+    MQ_PIN = 0  # define which analog input channel you are going to use (MCP3008)
+    RL_VALUE = 200  # define the load resistance on the board, in kilo ohms
+    RO_CLEAN_AIR_FACTOR = 10  # RO_CLEAR_AIR_FACTOR=(Sensor resistance in clean air)/RO,
+    # which is derived from the chart in datasheet
 
-    def __init__(self, Ro=10, analogPin=0):
-        self.Ro = Ro
-        self.MQ_PIN = analogPin
+    ######################### Software Related Macros #########################
+    CALIBARAION_SAMPLE_TIMES = 50  # define how many samples you are going to take in the calibration phase
+    CALIBRATION_SAMPLE_INTERVAL = 500  # define the time interval(in millisecond) between each samples in the
+    # calibration phase
+    READ_SAMPLE_INTERVAL = 50  # define the time interval(in millisecond) between each samples in
+    READ_SAMPLE_TIMES = 5  # define how many samples you are going to take in normal operation
+    # normal operation
+
+    ######################### Application Related Macros ######################
+    GAS_Alcohol = 0
+
+    def __init__(self, ro=10, analog_pin=0):
+        self.ro = ro
+        self.MQ_PIN = analog_pin
         self.adc = MCP3008()
-        
-        self.AlcoholCurve = [-1,0.3424,-0.6316] # two points are taken from the curve. 
-                                                # with these two points, a line is formed which is "approximately equivalent"
-                                                # to the original curve. 
-                                                # data format:{ x, y, slope}; point1: (lg0.1, lg2.2), point2: (lg10, lg0.12) 
-        
+
+        self.AlcoholCurve = [-1, 0.3424, -0.6316]  # two points are taken from the curve.
+        # with these two points, a line is formed which is "approximately equivalent"
+        # to the original curve.
+        # data format:{ x, y, slope}; point1: (lg0.1, lg2.2), point2: (lg10, lg0.12)
+
         print("Calibrating...")
         self.Ro = self.MQCalibration(self.MQ_PIN)
         print("Calibration is done...\n")
         print("Ro=%f kohm" % self.Ro)
-    
-    
+
     def MQPercentage(self):
         val = {}
         read = self.MQRead(self.MQ_PIN)
-        val["GAS_Alcohol"]  = self.MQGetGasPercentage(read/self.Ro, self.GAS_Alcohol)
+        val["GAS_Alcohol"] = self.MQGetGasPercentage(read / self.Ro, self.GAS_Alcohol)
         return val
-        
+
     ######################### MQResistanceCalculation #########################
     # Input:   raw_adc - raw value read from adc, which represents the voltage
     # Output:  the calculated sensor resistance
     # Remarks: The sensor and the load resistor forms a voltage divider. Given the voltage
     #          across the load resistor and its resistance, the resistance of the sensor
     #          could be derived.
-    ############################################################################ 
+    ############################################################################
     def MQResistanceCalculation(self, raw_adc):
-           return float(self.RL_VALUE*(1023.0-raw_adc)/float(raw_adc)); 
-     
-     
+        return float(self.RL_VALUE * (1023.0 - raw_adc) / float(raw_adc))
+
     ######################### MQCalibration ####################################
+
     # Input:   mq_pin - analog channel
     # Output:  Ro of the sensor
-    # Remarks: This function assumes that the sensor is in clean air. It uses  
-    #          MQResistanceCalculation to calculates the sensor resistance in clean air 
-    #          and then divides it with RO_CLEAN_AIR_FACTOR. RO_CLEAN_AIR_FACTOR is about 
+    # Remarks: This function assumes that the sensor is in clean air. It uses
+    #          MQResistanceCalculation to calculates the sensor resistance in clean air
+    #          and then divides it with RO_CLEAN_AIR_FACTOR. RO_CLEAN_AIR_FACTOR is about
     #          10, which differs slightly between different sensors.
-    ############################################################################ 
-    def MQCalibration(self,mq_pin):
+    ############################################################################
+    def MQCalibration(self, mq_pin):
         val = 0.0
-        for i in range(self.CALIBARAION_SAMPLE_TIMES):          # take multiple samples
-            val += self.MQResistanceCalculation(self.adc.read(mq_pin)) 
-            time.sleep(self.CALIBRATION_SAMPLE_INTERVAL/1000.0)
-            
-        val = val/self.CALIBARAION_SAMPLE_TIMES                 # calculate the average value
+        for i in range(self.CALIBARAION_SAMPLE_TIMES):  # take multiple samples
+            val += self.MQResistanceCalculation(self.adc.read(mq_pin))
+            time.sleep(self.CALIBRATION_SAMPLE_INTERVAL / 1000.0)
 
-        val = val/self.RO_CLEAN_AIR_FACTOR                      # divided by RO_CLEAN_AIR_FACTOR yields the Ro 
-                                                                # according to the chart in the datasheet 
-        return val;
-      
-      
+        val = val / self.CALIBARAION_SAMPLE_TIMES  # calculate the average value
+
+        val = val / self.RO_CLEAN_AIR_FACTOR  # divided by RO_CLEAN_AIR_FACTOR yields the Ro
+        # according to the chart in the datasheet
+        return val
+
     #########################  MQRead ##########################################
     # Input:   mq_pin - analog channel
     # Output:  Rs of the sensor
-    # Remarks: This function use MQResistanceCalculation to caculate the sensor resistence (Rs).
-    #          The Rs changes as the sensor is in the different consentration of the target
+    # Remarks: This function use MQResistanceCalculation to calculate the sensor resistance (Rs).
+    #          The Rs changes as the sensor is in the different concentration of the target
     #          gas. The sample times and the time interval between samples could be configured
     #          by changing the definition of the macros.
-    ############################################################################ 
-    def MQRead(self,mq_pin):
+    ############################################################################
+    def MQRead(self, mq_pin):
         rs = 0.0
 
         for i in range(self.READ_SAMPLE_TIMES):
-            
             rs += self.MQResistanceCalculation(self.adc.read(mq_pin))
-            
-            time.sleep(self.READ_SAMPLE_INTERVAL/1000.0)
 
-        rs = rs/self.READ_SAMPLE_TIMES
+            time.sleep(self.READ_SAMPLE_INTERVAL / 1000.0)
+
+        rs = rs / self.READ_SAMPLE_TIMES
 
         return rs
-     
+
     #########################  MQGetGasPercentage ##############################
     # Input:   rs_ro_ratio - Rs divided by Ro
     #          gas_id      - target gas type
     # Output:  ppm of the target gas
-    # Remarks: This function passes different curves to the MQGetPercentage function which 
+    # Remarks: This function passes different curves to the MQGetPercentage function which
     #          calculates the ppm (parts per million) of the target gas.
-    ############################################################################ 
+    ############################################################################
     def MQGetGasPercentage(self, rs_ro_ratio, gas_id):
-        if ( gas_id == self.GAS_Alcohol ):
+        if gas_id == self.GAS_Alcohol:
             return self.MQGetPercentage(rs_ro_ratio, self.AlcoholCurve)
-      
+
             return 0
-     
+
     #########################  MQGetPercentage #################################
     # Input:   rs_ro_ratio - Rs divided by Ro
     #          pcurve      - pointer to the curve of the target gas
     # Output:  ppm of the target gas
-    # Remarks: By using the slope and a point of the line. The x(logarithmic value of ppm) 
-    #          of the line could be derived if y(rs_ro_ratio) is provided. As it is a 
-    #          logarithmic coordinate, power of 10 is used to convert the result to non-logarithmic 
+    # Remarks: By using the slope and a point of the line. The x(logarithmic value of ppm)
+    #          of the line could be derived if y(rs_ro_ratio) is provided. As it is a
+    #          logarithmic coordinate, power of 10 is used to convert the result to non-logarithmic
     #          value.
-    ############################################################################ 
+    ############################################################################
     def MQGetPercentage(self, rs_ro_ratio, pcurve):
-        return (math.pow(10,( ((math.log(rs_ro_ratio)-pcurve[1])/ pcurve[2]) + pcurve[0])))
+        return math.pow(10, (((math.log(rs_ro_ratio) - pcurve[1]) / pcurve[2]) + pcurve[0]))
