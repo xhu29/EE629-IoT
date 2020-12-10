@@ -26,7 +26,7 @@ def readMQ():
 # Controller main function
 def runController():
     Vout = readMQ()
-    Rs = RL*(Vin/Vout - 1)
+    Rs = RL*(Vin*1023/Vout - 1)
     print('Concentration = {0:0.4f} ppm'.format(Vout), 'Resistance = {0:0.4f} kohm'.format(Rs))
     
 
