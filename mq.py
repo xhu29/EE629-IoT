@@ -9,7 +9,7 @@ class MQ:
     ######################### Hardware Related Macros #########################
     MQ_PIN = 0  # define which analog input channel you are going to use (MCP3008)
     RL_VALUE = 200  # define the load resistance on the board, in kilo ohms
-    RO_CLEAN_AIR_FACTOR = 10  # RO_CLEAR_AIR_FACTOR=(Sensor resistance in clean air)/RO,
+    RO_CLEAN_AIR_FACTOR = 60  # (It might be 'log60')RO_CLEAR_AIR_FACTOR=(Sensor resistance in clean air)/RO,
     # which is derived from the chart in datasheet
 
     ######################### Software Related Macros #########################
@@ -34,14 +34,14 @@ class MQ:
         # data format:{ x, y, slope}; point1: (lg0.1, lg2.2), point2: (lg10, lg0.12)
 
         print("Calibrating...")
-        self.Ro = self.MQCalibration(self.MQ_PIN)
+        self.ro = self.MQCalibration(self.MQ_PIN)
         print("Calibration is done...\n")
-        print("Ro=%f kohm" % self.Ro)
+        print("ro=%f kohm" % self.ro)
 
     def MQPercentage(self):
         val = {}
         read = self.MQRead(self.MQ_PIN)
-        val["GAS_Alcohol"] = self.MQGetGasPercentage(read / self.Ro, self.GAS_Alcohol)
+        val["GAS_Alcohol"] = self.MQGetGasPercentage(read / self.ro, self.GAS_Alcohol)
         return val
 
     ######################### MQResistanceCalculation #########################
@@ -52,7 +52,7 @@ class MQ:
     #          could be derived.
     ############################################################################
     def MQResistanceCalculation(self, raw_adc):
-        return float(self.RL_VALUE * (1023.0 - raw_adc) / float(raw_adc))
+        return float(self.RL_VALUE * (1023.0*5.0 - raw_adc) / float(raw_adc))
 
     ######################### MQCalibration ####################################
 
@@ -105,7 +105,6 @@ class MQ:
     def MQGetGasPercentage(self, rs_ro_ratio, gas_id):
         if gas_id == self.GAS_Alcohol:
             return self.MQGetPercentage(rs_ro_ratio, self.AlcoholCurve)
-
             return 0
 
     #########################  MQGetPercentage #################################
