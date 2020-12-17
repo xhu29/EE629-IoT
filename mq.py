@@ -52,7 +52,7 @@ class MQ:
     #          could be derived.
     ############################################################################
     def MQResistanceCalculation(self, raw_adc):
-        return float(self.RL_VALUE * (1023.0*5.0 - raw_adc) / float(raw_adc))
+        return float(self.RL_VALUE * (1023.0 - raw_adc) / float(raw_adc))
 
     ######################### MQCalibration ####################################
 
