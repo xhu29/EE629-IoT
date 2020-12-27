@@ -41,6 +41,7 @@ def runController():
     Rs_Ro_ratio = Rs/Ro
 
 def MQGetPercentage(self, Rs_Ro_ratio, pcurve):
+    AlcoholCurve = [-1, 0.3424, -0.6316]
         return math.pow(10, (((math.log(Rs_Ro_ratio) - pcurve[1]) / pcurve[2]) + pcurve[0]))
 
     print('Concentration = {0:0.4f} ppm'.format(Vout), ';', 'Rs = {0:0.4f} kohm'.format(Rs))
