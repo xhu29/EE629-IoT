@@ -26,12 +26,11 @@ def readMQ():
     Vout = ReadChannel(channel)
     for i in range (Sample_Times)
         Vout += ReadChannel(channel)
-        Vout1 =Vout/Sample_Times
-        sensor_volt = Vout1/1024*5
-        Rs_air = RL*(5.0 - sensor_volt)/sensor_volt
-        Ro = Rs_air/60.0
-        
-    return Ro
+    return Vout
+    Vout1 = Vout / Sample_Times
+    sensor_volt = Vout1 / 1024 * 5
+    Rs_air = RL * (5.0 - sensor_volt) / sensor_volt
+    Ro = Rs_air / 60.0
     print('Ro = {0:0.4f} Kiloohme'.format(Ro))
 
 # Controller main function
