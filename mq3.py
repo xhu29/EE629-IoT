@@ -24,7 +24,7 @@ def ReadChannel(channel):
 # Function to read sensor connected to MCP3008 and calibrate the sensor
 def readMQ():
     Vout = ReadChannel(channel)
-    for i in range (Sample_Times)
+    for i in range (Sample_Times):
         Vout += ReadChannel(channel)
     return Vout
     Vout1 = Vout / Sample_Times
