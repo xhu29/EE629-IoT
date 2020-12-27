@@ -41,9 +41,7 @@ def runController():
     Rs_Ro_ratio = Rs/Ro
     Concentration = math.pow(10, (((math.log(Rs_Ro_ratio) + 0.2891)/0.6316) # The approximately linear regression obtained from the curve on datasheet of each sensor
 
-    return Concentration
-
-    print('Concentration = {0:0.4f} mg/L'.format(Vout))
+    print('Concentration = {0:0.4f} mg/L'.format(Concentration))
 
 
 while True:
