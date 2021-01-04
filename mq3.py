@@ -40,7 +40,7 @@ def runController():
     Rs= RL*(5.0 - sensor_volt1) / sensor_volt1
     Rs_Ro_ratio = Rs/Ro
     Concentration = math.pow(10, (((math.log(Rs_Ro_ratio) + 0.2891)/0.6316) # The approximately linear regression obtained from the curve on datasheet of each sensor
-    print('Alcohol = {0:0.4f} mg/L'.format(Concentration),';','Rs = {0:0.4f} kohm'.format(Rs))
+    print('Alcohol = {0:0.4f} mg/L'.format(Concentration),';','Resistance = {0:0.4f} kohm'.format(Rs))
 
 
 while True:
