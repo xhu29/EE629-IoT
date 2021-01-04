@@ -9,7 +9,7 @@ spi.open(0, 0)
 spi.max_speed_hz = 976000
 
 # Define basic parameters of the sensor
-Vin = 5
+Vin = 5.0
 Sample_Times = 50 # Determine how many samples will be taken in the calibration phase
 RL = 200  # define the load resistance on the board, in kilo ohms
 #RO = 10  # Assume that RO equals to 10. Theoretically, it should be gained by calibrating the sensor in clean air.
