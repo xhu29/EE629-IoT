@@ -26,18 +26,17 @@ def readMQ():
     Vout = ReadChannel(channel)
     for i in range (Sample_Times):
         Vout += ReadChannel(channel)
-    return Vout
-    Vout1 = Vout / Sample_Times
-    sensor_volt = Vout1 / 1024 * 5
-    Rs_air = RL * (5.0 - sensor_volt) / sensor_volt
+        Vout1 = Vout / Sample_Times
+      sensor_volt = Vout1 / 1024 * Vin
+    Rs_air = RL * (Vin - sensor_volt) / sensor_volt
     Ro = Rs_air / 60.0
-    print("Ro = {0:0.4f} Kiloohme".format(Ro))
+    print("Ro = {0:0.4f} Kohm".format(Ro))
 
 # Controller main function
 def runController():
-    Vout2 = readMQ()
-    sensor_volt1 = Vout2 / 1024 * 5
-    Rs= RL*(5.0 - sensor_volt1) / sensor_volt1
+    Vout = readMQ()
+    sensor_volt = Vout / 1024 * Vin
+    Rs= RL*(Vin - sensor_volt1) / sensor_volt
     Rs_Ro_ratio = Rs/Ro
     Concentration = math.pow(10, (((math.log(Rs_Ro_ratio) + 0.2891)/0.6316) # The approximately linear regression obtained from the curve on datasheet of each sensor
     print('Alcohol = {0:0.4f} mg/L'.format(Concentration))
