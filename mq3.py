@@ -30,7 +30,7 @@ def MQCalibration():
         val = val/50 #calculate the average value
         Rs_air = RL*(5.0 - val/1024*5)/(val/1024*5)
         Ro = Rs_air/60.0
-        print ('Ro = {0:0.4f} ppm'.format(Ro)')
+        print ('Ro = {0:0.4f} ppm'.format(Ro))
         return val
   
 # Controller main function
