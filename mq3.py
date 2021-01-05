@@ -49,7 +49,6 @@ def runController(Ro):
     print('Concentration = {0:0.4f} mg/L'.format(Alcohol), ';', 'Rs = {0:0.4f} kohm'.format(Rs))
 
 Ro = MQCalibration()
-print(Ro)
 while True:
     try:
         runController(Ro)
