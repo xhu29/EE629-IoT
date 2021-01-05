@@ -49,10 +49,9 @@ def runController(Ro):
         Rs_Ro_Ratio) + 0.2891) / 0.6316))  # The approximately linear regression obtained from the curve on datasheet of each sensor
     print('Concentration = {0:0.4f} mg/L'.format(Alcohol), ';', 'Rs = {0:0.4f} kohm'.format(Rs))
 
-
+Ro = MQCalibration()
+print(Ro)
 while True:
-    Ro = MQCalibration()
-    print(Ro)
     try:
         runController(Ro)
         time.sleep(3)
