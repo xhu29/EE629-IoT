@@ -43,7 +43,8 @@ def runController():
     
 
 while True:
-    try:
+        try:
+        MQCalibration()                            
         runController()
         time.sleep(3)
     except KeyboardInterrupt:
