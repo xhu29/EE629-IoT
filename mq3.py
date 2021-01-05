@@ -31,7 +31,7 @@ def MQCalibration():
     val = 0.0
     for i in range(50):  # take 50 samples
         val += readMQ()
-        time.sleep(0.5)
+        time.sleep(0.2)
     val = val / 50  # calculate the average value
     Rs_air = RL * (Vin - val / 1023 * Vin) / (val / 1023 * Vin)
     Ro = Rs_air / 60.0
