@@ -52,7 +52,7 @@ def runController(Ro):
 
 while True:
     Ro = MQCalibration()
-    print Ro
+    print (Ro)
     try:
         runController(Ro)
         time.sleep(3)
