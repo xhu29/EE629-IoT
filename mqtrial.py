@@ -1,6 +1,6 @@
 import time
 import spidev
-channel = 1 # Channel '0' is for MQ3(alcohol) gas sensor.
+channel = 0 # Channel '0' is for MQ3(alcohol) gas sensor.
 
 # Open SPI bus
 spi = spidev.SpiDev()
