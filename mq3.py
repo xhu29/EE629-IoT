@@ -34,7 +34,7 @@ def MQCalibration():
         time.sleep(0.2)
     val = val / 50  # calculate the average value
     Rs_air = RL * (Vin - val / 1023 * Vin) / (val / 1023 * Vin)
-    Ro = Rs_air / 60.0
+    Ro = Rs_air / 60.0 # 60.0 was retrieved from the datasheet of MQ3 gas sensor when sensor resistance at is 0.4mg/L of alcohol in the clean air. 
     print('Ro = {0:0.4f} kohm'.format(Ro))
     return Ro
 
