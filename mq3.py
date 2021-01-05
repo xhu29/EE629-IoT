@@ -33,11 +33,11 @@ def MQCalibration():
     for i in range(50):  # take 50 samples
         val += readMQ()
         time.sleep(0.5)
-        val = val / 50  # calculate the average value
-        Rs_air = RL * (Vin - val / 1024 * Vin) / (val / 1024 * Vin)
-        Ro = Rs_air / 60.0
-        print('Ro = {0:0.4f} kohm'.format(Ro))
-        return Ro
+    val = val / 50  # calculate the average value
+    Rs_air = RL * (Vin - val / 1024 * Vin) / (val / 1024 * Vin)
+    Ro = Rs_air / 60.0
+    print('Ro = {0:0.4f} kohm'.format(Ro))
+    return Ro
 
 
 # Controller main function
@@ -52,10 +52,10 @@ def runController(Ro):
 
 while True:
     Ro = MQCalibration()
-    print (Ro)
+    print(Ro)
     try:
         runController(Ro)
         time.sleep(3)
-    
+
     except KeyboardInterrupt:
         exit()
