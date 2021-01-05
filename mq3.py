@@ -36,11 +36,11 @@ def MQCalibration():
         Rs_air = RL * (Vin - val / 1024 * Vin) / (val / 1024 * Vin)
         Ro = Rs_air / 60.0
         print('Ro = {0:0.4f} kohm'.format(Ro))
-        return val
+        return val; Ro
 
 
 # Controller main function
-def runController():
+def runController(Ro):
     Vout = readMQ()
     Rs = RL * (Vin * 1023 / Vout - 1)
     Rs_Ro_Ratio = Rs / Ro
@@ -50,9 +50,9 @@ def runController():
 
 
 while True:
-    MQCalibration()
+    Ro = MQCalibration()
     try:
-        runController()
+        runController(Ro)
         time.sleep(3)
     
     except KeyboardInterrupt:
