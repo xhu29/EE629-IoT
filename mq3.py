@@ -46,7 +46,7 @@ def runController(Ro):
     Rs_Ro_Ratio = Rs/Ro
     Alcohol = 532*pow(10, (2.3220 - math.log10(Rs_Ro_Ratio))/0.2202) #Refer to https://www.nap.edu/read/5435/chapter/11| 1 ppm = 0.00188 mg/L
     print('Alcohol = {0:0.4f} ppm'.format(Alcohol), ';', 'Rs = {0:0.4f} kohm'.format(Rs))
-    print (math.log10(Rs_Ro_Ratio))
+    
 
 Ro = MQCalibration()
 while True:
