@@ -33,7 +33,7 @@ def MQCalibration():
         val += readMQ()
         time.sleep(0.5)
     val = val / 50  # calculate the average value
-    Rs_air = RL * (Vin - val / 1024 * Vin) / (val / 1024 * Vin)
+    Rs_air = RL * (Vin - val / 1023 * Vin) / (val / 1023 * Vin)
     Ro = Rs_air / 60.0
     print('Ro = {0:0.4f} kohm'.format(Ro))
     return Ro
