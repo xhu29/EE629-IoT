@@ -20,12 +20,26 @@ def ReadChannel(channel):
 def readMQ():
     Vout = ReadChannel(channel)
     return Vout
+
+#Calibrate the sensor
+def MQCalibration():
+    val = 0.0
+    for i in range(50): #take 50 samples
+        val += readMQ()
+        time.sleep (0.5)
+        val = val/50 #calculate the average value
+        Rs_air = RL*(5.0 - val/1024*5)/(val/1024*5)
+        Ro = Rs_air/60.0
+        print ('Ro = {0:0.4f} ppm'.format(Ro)')
+        return val
   
 # Controller main function
 def runController():
     Vout = readMQ()
     Rs = RL*(Vin*1023/Vout - 1)
-    print('Concentration = {0:0.4f} ppm'.format(Vout), ';','Rs = {0:0.4f} kohm'.format(Rs))
+    Rs_Ro_Ratio = Rs/Ro
+    Alcohol = math.pow(10, (((math.log(Rs_Ro_ratio) + 0.2891)/0.6316) # The approximately linear regression obtained from the curve on datasheet of each sensor
+    print('Concentration = {0:0.4f} ppm'.format(Alcohol), ';','Rs = {0:0.4f} kohm'.format(Rs))
     
 
 while True:
