@@ -28,7 +28,7 @@ def MQCalibration():
         val += readMQ()
         time.sleep (0.5)
         val = val/50 #calculate the average value
-        Rs_air = RL*(5.0 - val/1024*5)/(val/1024*5)
+        Rs_air = RL*(Vin - val/1024*Vin)/(val/1024*Vin)
         Ro = Rs_air/60.0
         print ('Ro = {0:0.4f} ppm'.format(Ro))
         return val
