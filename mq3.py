@@ -36,7 +36,7 @@ def MQCalibration():
         Rs_air = RL * (Vin - val / 1024 * Vin) / (val / 1024 * Vin)
         Ro = Rs_air / 60.0
         print('Ro = {0:0.4f} kohm'.format(Ro))
-        return val; Ro
+        return Ro
 
 
 # Controller main function
