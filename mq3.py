@@ -2,7 +2,7 @@ import time
 import spidev
 import math
 
-channel = 0  # Channel '0' is for MQ3(alcohol) gas sensor.
+channel_Alcohol = 0  # Channel '0' is for MQ3(alcohol) gas sensor.
 
 # Open SPI bus
 spi = spidev.SpiDev()
@@ -22,7 +22,7 @@ def ReadChannel(channel):
 
 # Function to read sensor connected to MCP3008
 def readMQ():
-    Vout = ReadChannel(channel)
+    Vout = ReadChannel(channel_Alcohol)
     return Vout
 
 
@@ -30,7 +30,7 @@ def readMQ():
 def MQCalibration():
     val = 0.0
     for i in range(50):  # take 50 samples
-        val += readMQ(channel)
+        val += readMQ(channel_Alcohol)
         time.sleep(0.2)
     val = val / 50  # calculate the average value
     Rs_air = RL * (Vin - val / 1023 * Vin) / (val / 1023 * Vin)
