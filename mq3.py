@@ -10,7 +10,7 @@ spi.open(0, 0)
 spi.max_speed_hz = 976000
 
 # Define basic parameters of the sensor
-Vin = 5
+Vin = 5.0
 RL = 200  # define the load resistance on the board, in kilo ohms
 
 
