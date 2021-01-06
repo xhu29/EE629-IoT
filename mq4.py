@@ -45,7 +45,7 @@ def runController(Ro):
     Vout = readMQ()
     Rs = RL * (Vin * 1023 / Vout - 1)
     Rs_Ro_Ratio = Rs / Ro
-    Methane = pow(10, (1.8278 - math.log10(Rs_Ro_Ratio)) / 0.0001388)  
+    Methane = pow(10, (1.8278 - math.log10(Rs_Ro_Ratio)) / 0.1388)  
     print('Methane = {0:0.4f} ppm'.format(Methane), ';', 'Rs = {0:0.4f} kohm'.format(Rs))
 
 
