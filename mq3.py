@@ -44,11 +44,10 @@ def MQCalibration():
 def runController(Ro):
     Vout = readMQ()
     Vout_vol = Vout*(5.0/1023.0) #convert the analog values to voltage
+    print (Voul_vol)
     Rs = RL * (Vin - Vout_vol)/Vout_vol
-    print (Rs)
     Rs_Ro_Ratio = float (Rs)/float (Ro)
-    print (Rs_Ro_Ratio)
-    Alcohol = 532 * pow(10, (-0.2796 - math.log10(float (Rs_Ro_Ratio)))/0.6413)
+    Alcohol = 532 * pow(10, (-0.2796 - math.log10(Rs_Ro_Ratio))/0.6413)
     print('Alcohol = {0:0.4f} ppm'.format(Alcohol), ';', 'Rs_Ro_Ratio = {0:0.4f} kohm'.format(Rs_Ro_Ratio),';''Vout_vol = {0:0.2f} v'.format(Vout_vol))
 
 Ro = MQCalibration()
