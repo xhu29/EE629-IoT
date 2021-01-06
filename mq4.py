@@ -34,7 +34,8 @@ def MQCalibration():
         val += readMQ()
         time.sleep(0.2)
     val = val / 50  # calculate the average value
-    Rs_air = RL * (Vin - val / 1023 * Vin) / (val / 1023 * Vin)
+    Sensor_val = val*(5.0/1023.0) #convert the analog values to voltage
+    Rs_air = RL * (Vin - Sensor_val) / Sensor_val
     Ro = Rs_air / 4.5  # 60.0 was retrieved from the datasheet of MQ3 gas sensor when sensor resistance at is 0.4mg/L of alcohol in the clean air.
     print('Ro = {0:0.4f} kohm'.format(Ro))
     return Ro
@@ -43,7 +44,8 @@ def MQCalibration():
 # Controller main function
 def runController(Ro):
     Vout = readMQ()
-    Rs = RL * (Vin * 1023 / Vout - 1)
+    Vout_vol = Vout*(5.0/1023.0) #convert the analog values to voltage
+    Rs = RL * (Vin - Vout_vol)/Vout_vol
     Rs_Ro_Ratio = Rs / Ro
     Methane = pow(10, (1.0839 - math.log10(Rs_Ro_Ratio)) / 0.3601)  
     print('Methane = {0:0.4f} ppm'.format(Methane), ';', 'Rs = {0:0.4f} kohm'.format(Rs))
