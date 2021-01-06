@@ -2,7 +2,7 @@ import time
 import spidev
 import math
 
-channel_Alcohol = 0  # Channel '0' is for MQ3(alcohol) gas sensor.
+channel = 0  # Channel '0' is for MQ3(alcohol) gas sensor.
 
 # Open SPI bus
 spi = spidev.SpiDev()
@@ -22,7 +22,7 @@ def ReadChannel(channel):
 
 # Function to read sensor connected to MCP3008
 def readMQ():
-    Vout = ReadChannel(channel_Alcohol)
+    Vout = ReadChannel(channel)
     return Vout
 
 
@@ -33,8 +33,9 @@ def MQCalibration():
         val += readMQ()
         time.sleep(0.2)
     val = val / 50  # calculate the average value
-    Rs_air = RL * (Vin - val / 1023 * Vin) / (val / 1023 * Vin)
-    Ro = Rs_air / 60.0 # 60.0 was retrieved from the datasheet of MQ3 gas sensor when sensor resistance at is 0.4mg/L of alcohol in the clean air. 
+    Sensor_val = val*(5.0/1023.0) #convert the analog values to voltage
+    Rs_air = RL * (Vin - Sensor_val) / Sensor_val
+    Ro = Rs_air / 60.0
     print('Ro = {0:0.4f} kohm'.format(Ro))
     return Ro
 
@@ -42,11 +43,11 @@ def MQCalibration():
 # Controller main function
 def runController(Ro):
     Vout = readMQ()
-    Rs = RL * (Vin * 1023 / Vout - 1)
+    Vout_vol = Vout*(5.0/1023.0) #convert the analog values to voltage
+    Rs = RL * (Vin - Vout_vol)/Vout_vol
     Rs_Ro_Ratio = Rs/Ro
-    Alcohol = 532*pow(10, (-0.2796 - math.log10(Rs_Ro_Ratio))/0.6413) #Refer to https://www.nap.edu/read/5435/chapter/11| 1 ppm = 0.00188 mg/L
+    Alcohol = 532*pow(10, (-0.2796 - math.log10(Rs_Ro_Ratio))/0.6413)
     print('Alcohol = {0:0.4f} ppm'.format(Alcohol), ';', 'Rs = {0:0.4f} kohm'.format(Rs))
-    
 
 Ro = MQCalibration()
 while True:
