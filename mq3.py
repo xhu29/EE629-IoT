@@ -27,7 +27,7 @@ def readMQ():
 
 
 # Calibrate the sensor
-#def MQCalibration():
+def MQCalibration():
     val = 0.0
     for i in range(50):  # take 50 samples
         val += readMQ()
@@ -49,8 +49,7 @@ def runController(Ro):
     Alcohol = math.pow(10, (1.4638 - math.log10(Rs_Ro_Ratio))/0.6413)
     print('Alcohol = {0:0.4f} ppm'.format(Alcohol), ';', 'Rs_Ro_Ratio = {0:0.4f} kohm'.format(Rs_Ro_Ratio),';''Vout_vol = {0:0.2f} v'.format(Vout_vol))
 
-#Ro = MQCalibration()
-Ro = 8
+Ro = MQCalibration()
 while True:
     try:
         runController(Ro)
