@@ -45,6 +45,7 @@ def runController(Ro):
     Vout = readMQ()
     Vout_vol = Vout*(5.0/1023.0) #convert the analog values to voltage
     Rs = RL * (Vin - Vout_vol)/Vout_vol
+    print (Rs)
     Rs_Ro_Ratio = float (Rs)/float (Ro)
     print (Rs_Ro_Ratio)
     Alcohol = 532 * pow(10, (-0.2796 - math.log10(float (Rs_Ro_Ratio)))/0.6413)
