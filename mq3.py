@@ -47,7 +47,7 @@ def runController(Ro):
     Rs = RL * (Vin - Vout_vol)/Vout_vol
     Rs_Ro_Ratio = Rs/Ro
     Alcohol = 532*pow(10, (-0.2796 - math.log10(Rs_Ro_Ratio))/0.6413)
-    print('Alcohol = {0:0.4f} ppm'.format(Alcohol), ';', 'Rs = {0:0.4f} kohm'.format(Rs))
+    print('Alcohol = {0:0.4f} ppm'.format(Alcohol), ';', 'Rs_Ro_Ratio = {0:0.4f} kohm'.format(Rs_Ro_Ratio))
 
 Ro = MQCalibration()
 while True:
