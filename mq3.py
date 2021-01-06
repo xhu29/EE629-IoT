@@ -43,7 +43,7 @@ def MQCalibration():
 # Controller main function
 def runController(Ro):
     Vout = readMQ()
-    Vout_vol = Vout*(4.99/1023.0) #convert the analog values to voltage
+    Vout_vol = Vout*(4.9950/1023.0) #convert the analog values to voltage
     print (Vout_vol)
     Rs = RL * (Vin - Vout_vol)/Vout_vol
     Rs_Ro_Ratio = float (Rs)/float (Ro)
