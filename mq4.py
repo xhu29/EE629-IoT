@@ -46,7 +46,7 @@ def runController(Ro):
     Rs = RL * (Vin * 1023 / Vout - 1)
     Rs_Ro_Ratio = Rs / Ro
     Alcohol = pow(10, (1.8278 - math.log10(
-        Rs_Ro_Ratio)) / 0.0001388)  # Refer to https://www.nap.edu/read/5435/chapter/11| 1 ppm = 0.00188 mg/L
+        Rs_Ro_Ratio)) / 0.0001388)  
     print('Alcohol = {0:0.4f} ppm'.format(Alcohol), ';', 'Rs = {0:0.4f} kohm'.format(Rs))
 
 
