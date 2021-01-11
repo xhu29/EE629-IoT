@@ -66,8 +66,8 @@ def runController(Ro_alcohol, Ro_methane):
     print('Methane = {0:0.4f} ppm'.format(Methane), ';', 'Rs = {0:0.4f} kohm'.format(Rs_methane))
 
 
-Ro_alcohol = MQCalibration()
-Ro_methane = MQCalibration()
+Ro_alcohol = MQCalibration(Ro_alcohol, Ro_methane)
+Ro_methane = MQCalibration(Ro_alcohol, Ro_methane)
 while True:
     try:
         runController(Ro_alcohol, Ro_methane)
