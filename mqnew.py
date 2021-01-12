@@ -31,7 +31,7 @@ def ReadChannel(channel_mq3, channel_mq4):
 # Function to read sensor connected to MCP3008
 def read_mq3():
     Vout_alcohol = ReadChannel(channel_mq3)
-    return Vout_alcohol, Vout_methane
+    return Vout_alcohol
 
 def read_mq4():
     Vout_methane = ReadChannel(channel_mq4)
