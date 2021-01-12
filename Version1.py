@@ -15,8 +15,6 @@ spi.max_speed_hz = 976000
 Vin = 5
 RL_alcohol = 200  # define the load resistance on the board, in kilo ohms
 RL_methane = 20
-
-
 # RL_CO = 10
 # RL_NH3 = 47
 
@@ -25,17 +23,16 @@ def ReadChannel(channel):
     data = ((adc[1] & 3) << 8) + adc[2]
     return data
 
-
-Vout_alcohol = ReadChannel(channel_mq3)
-Vout_methane = ReadChannel(channel_mq4)
-
+def ReadMQ()
+    Vout = ReadChannel(channel)
+    return Vout
 
 # Calibrate each sensor in clean air
 ## Calibrate mq3 sensor
 def MQCalibration_mq3():
     val_alcohol = 0.0
     for i in range(50):  # take 50 samples
-        val_alcohol += Vout_alcohol
+        val_alcohol += ReadMQ(channel_mq3)
         time.sleep(0.2)
     val_alcohol = val_alcohol / 50
     Sensor_alcohol = val_alcohol * (5.0 / 1023.0)
@@ -50,7 +47,7 @@ def MQCalibration_mq3():
 def MQCalibration_mq4():
     val_methane = 0.0
     for i in range(50):  # take 50 samples
-        val_methane += Vout_methane
+        val_methane += ReadMQ(channel_mq4)
         time.sleep(0.2)
     val_methane = val_methane / 50
     Sensor_methane = val_methane * (5.0 / 1023.0)
@@ -58,7 +55,6 @@ def MQCalibration_mq4():
     Ro_methane = Rs_air_methane / 4.5
     print('Ro_methane= {0:0.4f} kohm'.format(Ro_methane))
     return Ro_methane
-
 
 
 def runController(Ro_alcohol, Ro_methane):
@@ -70,7 +66,8 @@ def runController(Ro_alcohol, Ro_methane):
         Rs_Ro_Ratio_alcohol)) / 0.6413)  # Refer to https://www.nap.edu/read/5435/chapter/11| 1 ppm = 0.00188 mg/L
     Methane = pow(10, (1.0839 - math.log10(
         Rs_Ro_Ratio_methane)) / 0.3601)
-    print('Alcohol = {0:0.4f} ppm'.format(Alcohol), ';', 'Methane = {0:0.4f} ppm'.format(Methane))
+    print('Alcohol = {0:0.4f} ppm'.format(Alcohol), ';', 'Rs = {0:0.4f} kohm'.format(Rs_alcohol))
+    print('Methane = {0:0.4f} ppm'.format(Methane), ';', 'Rs = {0:0.4f} kohm'.format(Rs_methane))
     return Alcohol, Methane
 
 
@@ -78,8 +75,14 @@ Ro_alcohol = MQCalibration_mq3()
 Ro_methane = MQCalibration_mq4()
 
 while True:
+    f = open('Result.txt', 'w+')
     try:
-        runController(Ro_alcohol, Ro_methane)
+        Alcohol_test, Methane_test = runController(Ro_alcohol, Ro_methane)
+        now_time = time.time()
+        Time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time()))
+        f.write('\nTest_Time:%s' % Time)
+        f.write('\nAlcohol_test:%0.4f' % Alcohol_test)
+        f.write('\nMethane_test:%0.4f' % Methane_test)
         time.sleep(3)
 
     except KeyboardInterrupt:
