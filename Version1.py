@@ -15,6 +15,8 @@ spi.max_speed_hz = 976000
 Vin = 5
 RL_alcohol = 200  # define the load resistance on the board, in kilo ohms
 RL_methane = 20
+
+
 # RL_CO = 10
 # RL_NH3 = 47
 
@@ -23,16 +25,17 @@ def ReadChannel(channel):
     data = ((adc[1] & 3) << 8) + adc[2]
     return data
 
-def ReadMQ()
-    Vout = ReadChannel(channel)
-    return Vout
+
+Vout_alcohol = ReadChannel(channel_mq3)
+Vout_methane = ReadChannel(channel_mq4)
+
 
 # Calibrate each sensor in clean air
 ## Calibrate mq3 sensor
 def MQCalibration_mq3():
     val_alcohol = 0.0
     for i in range(50):  # take 50 samples
-        val_alcohol += ReadMQ(channel_mq3)
+        val_alcohol += Vout_alcohol
         time.sleep(0.2)
     val_alcohol = val_alcohol / 50
     Sensor_alcohol = val_alcohol * (5.0 / 1023.0)
@@ -47,7 +50,7 @@ def MQCalibration_mq3():
 def MQCalibration_mq4():
     val_methane = 0.0
     for i in range(50):  # take 50 samples
-        val_methane += ReadMQ(channel_mq4)
+        val_methane += Vout_methane
         time.sleep(0.2)
     val_methane = val_methane / 50
     Sensor_methane = val_methane * (5.0 / 1023.0)
