@@ -50,7 +50,7 @@ spi.open(0, 0)
 spi.max_speed_hz = 976000
 
 # Define basic parameters of the sensors
-Vin = 5
+Vin = 5.0
 RL_alcohol = 200  # Determine the load resistance on the board, in kilo ohms
 RL_methane_butane_H2S = 20  # Methane, butane, and hydrogen sulfide sensors have the same RL value.
 RL_CO = 10
@@ -222,5 +222,5 @@ while True:
         worksheet = None
         time.sleep(FREQUENCY_SECONDS)
         continue
-    print('Wrote a row to {0}'.format(GDOCS_SPREADSHEET_NAME))
+    #print('Wrote a row to {0}'.format(GDOCS_SPREADSHEET_NAME))
     time.sleep(FREQUENCY_SECONDS)
