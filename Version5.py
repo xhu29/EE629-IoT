@@ -64,17 +64,32 @@ def ReadChannel(channel):
     data = ((adc[1] & 3) << 8) + adc[2]
     return data
 
+
 # Function to read sensor connected to MCP3008
-def Read():
-    Vout = ReadChannel(channel)
-    return Vout
+## Read sensor mq3
+def ReadMq3():
+    Vout_alcohol = ReadChannel(channel_mq3)
+    return Vout_alcohol
 
+## Read sensor mq4
+def ReadMq4():
+    Vout_methane = ReadChannel(channel_mq4)
+    return Vout_methane
 
-Vout_alcohol = Read(channel_mq3)
-Vout_methane = Read(channel_mq4)
-Vout_butane = Read(channel_mq6)
-Vout_CO = Read(channel_mq7)
-Vout_H2S = ReadChannel(channel_mq136)
+## Read sensor mq6
+def ReadMq6():
+    Vout_butane = ReadChannel(channel_mq6)
+    return Vout_butane
+
+## Read sensor mq7
+def ReadMq7():
+    Vout_CO = ReadChannel(channel_mq7)
+    return Vout_CO
+
+## Read sensor mq136
+def ReadMq136():
+    Vout_H2S = ReadChannel(channel_mq136)
+    return Vout_H2S
 
 
 # Calibrate each sensor in clean air
@@ -150,11 +165,11 @@ def MQCalibration_mq136():
 
 
 def runController(Ro_alcohol, Ro_methane, Ro_butane, Ro_CO, Ro_H2S):
-    Vout_alcohol = ReadChannel(channel_mq3)
-    Vout_methane = ReadChannel(channel_mq4)
-    Vout_butane = ReadChannel(channel_mq6)
-    Vout_CO = ReadChannel(channel_mq7)
-    Vout_H2S = ReadChannel(channel_mq136)
+    Vout_alcohol = ReadMq3()
+    Vout_methane = ReadMq4()
+    Vout_butane = ReadMq6()
+    Vout_CO = ReadMq7()
+    Vout_H2S = ReadMq136()
 
     Rs_alcohol = RL_alcohol * (4.9950 * 1023 / Vout_alcohol - 1)
     Rs_methane = RL_methane_butane_H2S * (4.9950 * 1023 / Vout_methane - 1)
