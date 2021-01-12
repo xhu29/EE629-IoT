@@ -97,7 +97,7 @@ def ReadMq136():
 def MQCalibration_mq3():
     val_alcohol = 0.0
     for i in range(50):  # take 50 samples
-        val_alcohol += Vout_alcohol
+        val_alcohol += ReadMq3()
         time.sleep(0.2)
     val_alcohol = val_alcohol / 50
     Sensor_alcohol = val_alcohol * (5.0 / 1023.0)
@@ -112,7 +112,7 @@ def MQCalibration_mq3():
 def MQCalibration_mq4():
     val_methane = 0.0
     for i in range(50):  # take 50 samples
-        val_methane += Vout_methane
+        val_methane += ReadMq4()
         time.sleep(0.2)
     val_methane = val_methane / 50
     Sensor_methane = val_methane * (5.0 / 1023.0)
@@ -126,7 +126,7 @@ def MQCalibration_mq4():
 def MQCalibration_mq6():
     val_butane = 0.0
     for i in range(50):  # take 50 samples
-        val_butane += Vout_butane
+        val_butane += ReadMq6()
         time.sleep(0.2)
     val_butane = val_butane / 50
     Sensor_butane = val_butane * (5.0 / 1023.0)
@@ -140,7 +140,7 @@ def MQCalibration_mq6():
 def MQCalibration_mq7():
     val_CO = 0.0
     for i in range(50):  # take 50 samples
-        val_CO += Vout_CO
+        val_CO += ReadMq7()
         time.sleep(0.2)
     val_CO = val_CO / 50
     Sensor_CO = val_CO * (5.0 / 1023.0)
@@ -154,7 +154,7 @@ def MQCalibration_mq7():
 def MQCalibration_mq136():
     val_H2S = 0.0
     for i in range(50):  # take 50 samples
-        val_H2S += Vout_H2S
+        val_H2S += ReadMq136()
         time.sleep(0.2)
     val_H2S = val_H2S / 50
     Sensor_H2S = val_H2S * (5.0 / 1023.0)
