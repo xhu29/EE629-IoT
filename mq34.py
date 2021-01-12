@@ -24,13 +24,13 @@ def ReadChannel(channel):
 
 
 # Function to read sensor connected to MCP3008
-def readMQ(Vout_alcohol, Vout_methane):
+def readMQ():
     Vout_alcohol = ReadChannel(channel = 0)
     Vout_methane = ReadChannel(channel = 2)
     return Vout_alcohol, Vout_methane
 
 # Calibrate the sensor
-def MQCalibration(Ro_alcohol, Ro_methane):
+def MQCalibration():
     val_alcohol = 0.0
     val_methane = 0.0
     for i in range(50):  # take 50 samples
@@ -65,8 +65,8 @@ def runController(Ro_alcohol, Ro_methane):
     print('Methane = {0:0.4f} ppm'.format(Methane), ';', 'Rs = {0:0.4f} kohm'.format(Rs_methane))
 
 
-Ro_alcohol = MQCalibration(Ro_alcohol, Ro_methane)
-Ro_methane = MQCalibration(Ro_alcohol, Ro_methane)
+Ro_alcohol = MQCalibration()
+Ro_methane = MQCalibration()
 while True:
     try:
         runController(Ro_alcohol, Ro_methane)
