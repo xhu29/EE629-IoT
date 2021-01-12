@@ -69,7 +69,9 @@ while True:
     f = open('Result.txt', 'w+')
     try:
         Alcohol_test,Methane_test= runController(Ro_alcohol, Ro_methane)
-        Time= datatime.datatime.now() # 2017-04-17 22:46:18.013458
+       
+        now_time = time.time()
+        Time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time()))
         f.write('\nTest_Time:%s' % Time)
         f.write('\nAlcohol_test:%p' % Alcohol_test)
         f.write('\nMethane_test:%p' % Methane_test)
