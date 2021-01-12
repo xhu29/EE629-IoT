@@ -2,9 +2,11 @@ import time
 import spidev
 import math
 import thingspeak
+
 channel_id = 1205799
 write_key = '4HXYG891CMS8ZOA1'
 read_key = 'B0Q50YZYJCBTU944'
+pin = 0
 
 
 # Assign MCP3008 channel to each sensor
