@@ -31,23 +31,34 @@ Vout_methane = ReadChannel(channel_mq4)
 
 
 # Calibrate each sensor in clean air
-def MQCalibration(Vout):
+## Calibrate mq3 sensor
+def MQCalibration_mq3():
     val_alcohol = 0.0
     for i in range(50):  # take 50 samples
-        val_alcohol += Vout
+        val_alcohol += Vout_alcohol
         time.sleep(0.2)
     val_alcohol = val_alcohol / 50
     Sensor_alcohol = val_alcohol * (5.0 / 1023.0)
     Rs_air_alcohol = RL_alcohol * (Vin - Sensor_alcohol) / (Sensor_alcohol)
-    # 60.0 was retrieved from the datasheet of MQ3 gas sensor when sensor
+    Ro_alcohol = Rs_air_alcohol / 60  # 60.0 was retrieved from the datasheet of MQ3 gas sensor when sensor
     # resistance at is 0.4mg/L of alcohol in the clean air.
-    return Rs_air_alcohol
+    print('Ro_alcohol = {0:0.4f} kohm'.format(Ro_alcohol))
+    return Ro_alcohol
 
 
-Rs_air_alcohol = MQCalibration(Vout_alcohol)
-Ro_alcohol = Rs_air_alcohol / 60
-Rs_air_methane = MQCalibration(Vout_methane)
-Ro_methane = Rs_air_methane / 4.5
+## Calibrate mq4 sensor
+def MQCalibration_mq4():
+    val_methane = 0.0
+    for i in range(50):  # take 50 samples
+        val_methane += Vout_methane
+        time.sleep(0.2)
+    val_methane = val_methane / 50
+    Sensor_methane = val_methane * (5.0 / 1023.0)
+    Rs_air_methane = RL_methane * (Vin - Sensor_methane) / (Sensor_methane)
+    Ro_methane = Rs_air_methane / 4.5
+    print('Ro_methane= {0:0.4f} kohm'.format(Ro_methane))
+    return Ro_methane
+
 
 
 def runController(Ro_alcohol, Ro_methane):
@@ -63,6 +74,9 @@ def runController(Ro_alcohol, Ro_methane):
     print('Methane = {0:0.4f} ppm'.format(Methane), ';', 'Rs = {0:0.4f} kohm'.format(Rs_methane))
     return Alcohol, Methane
 
+
+Ro_alcohol = MQCalibration_mq3()
+Ro_methane = MQCalibration_mq4()
 
 while True:
     f = open('Result.txt', 'w+')
