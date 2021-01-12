@@ -2,8 +2,8 @@ import time
 import spidev
 import math
 
-channel = 0  # Channel '0' is for MQ3(alcohol) gas sensor.
-channel = 2  # Channel '2' is for MQ4 (Methane and CNG) gas sensor.
+channel_mq3 = 0  # Channel '0' is for MQ3(alcohol) gas sensor.
+channel_mq4 = 2  # Channel '2' is for MQ4 (Methane and CNG) gas sensor.
 
 # Open SPI bus
 spi = spidev.SpiDev()
@@ -17,21 +17,24 @@ RL_methane = 20
 # RL_CO = 10
 # RL_NH3 = 47
 
-def ReadChannel(channel):
-    adc = spi.xfer2([1, (8 + channel) << 4, 0])
-    data = ((adc[1] & 3) << 8) + adc[2]
-    return data
+def ReadChannel(channel_mq3, channel_mq4):
+    adc_mq3 = spi.xfer2([1, (8 + channel_mq3) << 4, 0])
+    data_mq3 = ((adc_mq3[1] & 3) << 8) + adc_mq3[2]
+    
+    adc_mq4 = spi.xfer2([1, (8 + channel_mq4) << 4, 0])
+    data_mq4 = ((adc_mq4[1] & 3) << 8) + adc_mq4[2]
+    return data_mq3, data_mq4
 
 
 # Function to read sensor connected to MCP3008
 def readMQ():
-    Vout_alcohol = ReadChannel(channel = 0)
-    Vout_methane = ReadChannel(channel = 2)
+    Vout_alcohol = ReadChannel(channel_mq3)
+    Vout_methane = ReadChannel(channel_mq4)
     return Vout_alcohol, Vout_methane
 
 
 # Calibrate the sensor
-def MQCalibration(Ro_alcohol, Ro_methane):
+def MQCalibration():
     val_alcohol = 0.0
     val_methane = 0.0
     for i in range(50):  # take 50 samples
@@ -66,11 +69,11 @@ def runController(Ro_alcohol, Ro_methane):
     print('Methane = {0:0.4f} ppm'.format(Methane), ';', 'Rs = {0:0.4f} kohm'.format(Rs_methane))
 
 
-Ro_alcohol_ = MQCalibration(Ro_alcohol)
-Ro_methane1_ = MQCalibration(Ro_alcohol)
+Ro_alcohol = MQCalibration()
+Ro_methane1 = MQCalibration()
 while True:
     try:
-        runController(Ro_alcohol_, Ro_methane_)
+        runController(Ro_alcohol, Ro_methane)
         time.sleep(3)
 
     except KeyboardInterrupt:
