@@ -24,10 +24,11 @@ def ReadChannel(channel):
 
 
 # Function to read sensor connected to MCP3008
-def readMQ(Vout_alcohol, Vout_methane):
+def readMQ():
     Vout_alcohol = ReadChannel(channel = 0)
     Vout_methane = ReadChannel(channel = 2)
     return Vout_alcohol, Vout_methane
+
 
 # Calibrate the sensor
 def MQCalibration():
@@ -53,8 +54,8 @@ def MQCalibration():
 def runController(Ro_alcohol, Ro_methane):
     Vout_alcohol = readMQ(Vout_alcohol)
     Vout_methane = readMQ(Vout_methane)
-    Rs_alcohol = RL_alcohol * (4.99 * 1023 / Vout_alcohol - 1)
-    Rs_methane = RL_methane * (4.99 * 1023 / Vout_methane - 1)
+    Rs_alcohol = RL_alcohol * (Vin * 1023 / Vout_alcohol - 1)
+    Rs_methane = RL_methane * (Vin * 1023 / Vout_methane - 1)
     Rs_Ro_Ratio_alcohol = Rs_alcohol / Ro_alcohol
     Rs_Ro_Ratio_methane = Rs_methane / Ro_methane
     Alcohol = 532* pow(10, (-0.2796 - math.log10(
@@ -64,9 +65,9 @@ def runController(Ro_alcohol, Ro_methane):
     print('Alcohol = {0:0.4f} ppm'.format(Alcohol), ';', 'Rs = {0:0.4f} kohm'.format(Rs_alcohol))
     print('Methane = {0:0.4f} ppm'.format(Methane), ';', 'Rs = {0:0.4f} kohm'.format(Rs_methane))
 
+
 Ro_alcohol = MQCalibration(Ro_alcohol, Ro_methane)
 Ro_methane = MQCalibration(Ro_alcohol, Ro_methane)
-    
 while True:
     try:
         runController(Ro_alcohol, Ro_methane)
