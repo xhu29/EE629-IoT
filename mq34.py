@@ -36,7 +36,7 @@ def readMQ(channel_mq3, channel_mq4):
 
 
 # Calibrate the sensor
-def MQCalibration(Vout_alcohol，Vout_methane):
+def MQCalibration():
     val_alcohol = 0.0
     val_methane = 0.0
     for i in range(50):  # take 50 samples
