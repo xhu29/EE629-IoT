@@ -74,8 +74,6 @@ while True:
         f.write('\nTest_Time:%s' % Time)
         f.write('\nAlcohol_test:%0.4f' % Alcohol_test)
         f.write('\nMethane_test:%0.4f' % Methane_test)
-        N= N+1
-
         time.sleep(3)
 
     except KeyboardInterrupt:
