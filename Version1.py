@@ -122,6 +122,6 @@ while True:
         worksheet = None
         time.sleep(FREQUENCY_SECONDS)
         continue
-    print('Wrote a row to {0}'.format("Machine Olfactory Project"))
+    print('Wrote a row to {0}'.format(GDOCS_SPREADSHEET_NAME))
     time.sleep(FREQUENCY_SECONDS)
 
