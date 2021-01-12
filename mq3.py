@@ -14,10 +14,10 @@ Vin = 5.0
 RL = 200  # define the load resistance on the board, in kilo ohms
 
 
-#def ReadChannel(channel):
-    #adc = spi.xfer2([1, (8 + channel) << 4, 0])
-    #data = ((adc[1] & 3) << 8) + adc[2]
-    #return data
+def ReadChannel(channel):
+    adc = spi.xfer2([1, (8 + channel) << 4, 0])
+    data = ((adc[1] & 3) << 8) + adc[2]
+    return data
 
 
 # Function to read sensor connected to MCP3008
