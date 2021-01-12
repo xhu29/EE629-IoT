@@ -74,8 +74,8 @@ def MQCalibration_mq4():
 # Controller main function
 def runController(Ro_alcohol, Ro_methane):
     global Vout_alcohol, Vout_methane
-    Vout_alcohol = readmq3()
-    Vout_methane = readmq4()
+    Vout_alcohol = read_mq3()
+    Vout_methane = read_mq4()
     Rs_alcohol = RL_alcohol * (Vin * 1023 / Vout_alcohol - 1)
     Rs_methane = RL_methane * (Vin * 1023 / Vout_methane - 1)
     Rs_Ro_Ratio_alcohol = Rs_alcohol / Ro_alcohol
