@@ -19,23 +19,28 @@ RL_methane = 20
 # RL_CO = 10
 # RL_NH3 = 47
 
-def ReadChannel(channel_mq3, channel_mq4):
+def ReadChannel_mq3(channel_mq3):
     adc_mq3 = spi.xfer2([1, (8 + channel_mq3) << 4, 0])
     data_mq3 = ((adc_mq3[1] & 3) << 8) + adc_mq3[2]
+    return data_mq3
 
+
+def ReadChannel_mq4(channel_mq4):
     adc_mq4 = spi.xfer2([1, (8 + channel_mq4) << 4, 0])
     data_mq4 = ((adc_mq4[1] & 3) << 8) + adc_mq4[2]
-    return data_mq3, data_mq4
+    return data_mq4
 
 
 # Function to read sensor connected to MCP3008
 def read_mq3():
-    Vout_alcohol = ReadChannel(channel_mq3)
+    Vout_alcohol = ReadChannel_mq3(channel_mq3)
     return Vout_alcohol
 
+
 def read_mq4():
-    Vout_methane = ReadChannel(channel_mq4)
+    Vout_methane = ReadChannel_mq4(channel_mq4)
     return Vout_methane
+
 
 # Calibrate mq3 sensor
 def MQCalibration_mq3():
@@ -46,8 +51,8 @@ def MQCalibration_mq3():
     val_alcohol = val_alcohol / 50
     Sensor_alcohol = val_alcohol * (5.0 / 1023.0)
     Rs_air_alcohol = RL_alcohol * (Vin - Sensor_alcohol) / (Sensor_alcohol)
-    Ro_alcohol = Rs_air_alcohol / 60  # 60.0 was retrieved from the datasheet of MQ3 gas sensor when sensor 
-    # resistance at is 0.4mg/L of alcohol in the clean air. 
+    Ro_alcohol = Rs_air_alcohol / 60  # 60.0 was retrieved from the datasheet of MQ3 gas sensor when sensor
+    # resistance at is 0.4mg/L of alcohol in the clean air.
     print('Ro_alcohol = {0:0.4f} kohm'.format(Ro_alcohol))
     return Ro_alcohol
 
