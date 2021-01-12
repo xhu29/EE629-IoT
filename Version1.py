@@ -78,15 +78,10 @@ Ro_alcohol = MQCalibration_mq3()
 Ro_methane = MQCalibration_mq4()
 
 while True:
-    f = open('Result.txt', 'w+')
     try:
-        Alcohol_test, Methane_test = runController(Ro_alcohol, Ro_methane)
-        now_time = time.time()
-        Time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time()))
-        f.write('\nTest_Time:%s' % Time)
-        f.write('\nAlcohol_test:%0.4f' % Alcohol_test)
-        f.write('\nMethane_test:%0.4f' % Methane_test)
+        runController(Ro_alcohol, Ro_methane)
         time.sleep(3)
 
     except KeyboardInterrupt:
         exit()
+
