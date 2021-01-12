@@ -113,9 +113,8 @@ while True:
     
     try:
         Alcohol_test, Methane_test = runController(Ro_alcohol, Ro_methane)
-        now_time = time.time()
-        Time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time()))
-        worksheet.append_row((str(now_time), Alcohol_test, Methane_test))
+        Time = datetime.datetime.now()
+        worksheet.append_row((str(Time), Alcohol_test, Methane_test))
 
     except:
         print('Append error, logging in again')
