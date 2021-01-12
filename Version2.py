@@ -1,8 +1,8 @@
 import time
 import spidev
 import math
-import httplib
-import urllib
+import httplib2
+import urllib3
 key = "6FC69MM5560TGGKH" #API key for ThingSpeak Channel
 
 # Assign MCP3008 channel to each sensor
