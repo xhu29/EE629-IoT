@@ -36,12 +36,12 @@ def readMQ(channel_mq3, channel_mq4):
 
 
 # Calibrate the sensor
-def MQCalibration():
+def MQCalibration(Vout_alcohol，Vout_methane):
     val_alcohol = 0.0
     val_methane = 0.0
     for i in range(50):  # take 50 samples
-        val_alcohol += readMQ(channel_mq3)
-        val_methane += readMQ(channel_mq4)
+        val_alcohol += readMQ(Vout_alcohol)
+        val_methane += readMQ(Vout_methane)
         time.sleep(0.2)
     val_alcohol = val_alcohol / 50
     val_methane = val_methane / 50
@@ -71,8 +71,8 @@ def runController(Ro_alcohol, Ro_methane):
     print('Methane = {0:0.4f} ppm'.format(Methane), ';', 'Rs = {0:0.4f} kohm'.format(Rs_methane))
 
 
-Ro_alcohol = MQCalibration()
-Ro_methane = MQCalibration()
+Ro_alcohol = MQCalibration(Vout_alcohol)
+Ro_methane = MQCalibration(Vout_methane)
 while True:
     try:
         runController(Ro_alcohol, Ro_methane)
