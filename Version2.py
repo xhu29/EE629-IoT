@@ -3,7 +3,7 @@ import spidev
 import math
 import httplib2
 import urllib3
-key = "6FC69MM5560TGGKH" #API key for ThingSpeak Channel
+key = "4HXYG891CMS8ZOA1" #API key for ThingSpeak Channel
 
 # Assign MCP3008 channel to each sensor
 channel_mq3 = 0  # Channel '0' is for MQ3(alcohol) gas sensor.
