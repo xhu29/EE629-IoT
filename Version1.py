@@ -7,7 +7,7 @@ import sys
 import gspread
 import psutil
 #import datetime
-from system_info import get_temperature
+#from system_info import get_temperature
 from oauth2client.service_account import ServiceAccountCredentials
 GDOCS_OAUTH_JSON       = 'machine-olfactory-project-acd23fe11193.json'
 GDOCS_SPREADSHEET_NAME = 'Machine Olfactory Project'
