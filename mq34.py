@@ -31,7 +31,7 @@ def readMQ():
 
 
 # Calibrate the sensor
-def MQCalibration():
+def MQCalibration(Ro_alcohol, Ro_methane):
     val_alcohol = 0.0
     val_methane = 0.0
     for i in range(50):  # take 50 samples
@@ -66,11 +66,11 @@ def runController(Ro_alcohol, Ro_methane):
     print('Methane = {0:0.4f} ppm'.format(Methane), ';', 'Rs = {0:0.4f} kohm'.format(Rs_methane))
 
 
-Ro_alcohol1 = MQCalibration(Ro_alcohol)
-Ro_methane1 = MQCalibration(Ro_alcohol)
+Ro_alcohol_ = MQCalibration(Ro_alcohol)
+Ro_methane1_ = MQCalibration(Ro_alcohol)
 while True:
     try:
-        runController(Ro_alcohol, Ro_methane)
+        runController(Ro_alcohol_, Ro_methane_)
         time.sleep(3)
 
     except KeyboardInterrupt:
