@@ -11,7 +11,7 @@ pin = 0
 
 # Assign MCP3008 channel to each sensor
 channel_mq3 = 0  # Channel '0' is for MQ3(alcohol) gas sensor.
-channel_mq4 = 2  # Channel '2' is for MQ4 (Methane and CNG) gas sensor.
+channel_mq4 = 1  # Channel '2' is for MQ4 (Methane and CNG) gas sensor.
 
 # Open SPI bus
 spi = spidev.SpiDev()
