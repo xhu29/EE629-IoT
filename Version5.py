@@ -65,7 +65,7 @@ def ReadChannel(channel):
     return data
 
 # Function to read sensor connected to MCP3008
-def ReadMQ():
+def Read():
     Vout = ReadChannel(channel)
     return Vout
 
