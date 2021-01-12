@@ -3,7 +3,7 @@ import spidev
 import math
 
 
-
+#Assign MCP3008 channel to each sensor
 channel_mq3 = 0  # Channel '0' is for MQ3(alcohol) gas sensor.
 channel_mq4 = 2  # Channel '2' is for MQ4 (Methane and CNG) gas sensor.
 
@@ -16,23 +16,18 @@ spi.max_speed_hz = 976000
 Vin = 5
 RL_alcohol = 200  # define the load resistance on the board, in kilo ohms
 RL_methane = 20
-
-
 # RL_CO = 10
 # RL_NH3 = 47
-
-
 
 def ReadChannel(channel_mq):
     adc_mq = spi.xfer2([1, (8 + channel_mq) << 4, 0])
     data_mq = ((adc_mq[1] & 3) << 8) + adc_mq[2]
     return data_mq
 
-
-
 Vout_alcohol_mq4= ReadChannel(channel_mq4)
 Vout_alcohol_mq3= ReadChannel(channel_mq3)
 
+#Calibrate each sensor in clean air
 def MQCalibration_mq(Vout_alcohol_mq):
     val_alcohol = 0.0
     for i in range(50):  # take 50 samples
@@ -68,7 +63,6 @@ while True:
     f = open('Result.txt', 'w+')
     try:
         Alcohol_test,Methane_test= runController(Ro_alcohol, Ro_methane)
-       
         now_time = time.time()
         Time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time()))
         f.write('\nTest_Time:%s' % Time)
