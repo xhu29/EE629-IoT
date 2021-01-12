@@ -43,7 +43,6 @@ def MQCalibration_mq(Vout_alcohol_mq):
     Rs_air_alcohol = RL_alcohol * (Vin - Sensor_alcohol) / (Sensor_alcohol)
     # 60.0 was retrieved from the datasheet of MQ3 gas sensor when sensor
     # resistance at is 0.4mg/L of alcohol in the clean air.
-    print('Ro_alcohol = {0:0.4f} kohm'.format(Ro_alcohol))
     return Rs_air_alcohol
 Rs__air_alcohol_mq3 = MQCalibration_mq(Vout_alcohol_mq3)
 Ro_alcohol= Rs__air_alcohol_mq3/60
