@@ -134,7 +134,7 @@ def MQCalibration_mq7():
 def MQCalibration_mq136():
     val_H2S = 0.0
     for i in range(50):  # take 50 samples
-        val_H2S += Vout_CO
+        val_H2S += Vout_H2S
         time.sleep(0.2)
     val_H2S = val_H2S / 50
     Sensor_H2S = val_H2S * (5.0 / 1023.0)
