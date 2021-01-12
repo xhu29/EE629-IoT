@@ -58,6 +58,8 @@ def MQCalibration_mq4():
 
 
 def runController(Ro_alcohol, Ro_methane):
+    Vout_alcohol = ReadMQ(channel_mq3)
+    Vout_methane = ReadMQ(channel_mq4)
     Rs_alcohol = RL_alcohol * (Vin * 1023 / Vout_alcohol - 1)
     Rs_methane = RL_methane * (Vin * 1023 / Vout_methane - 1)
     Rs_Ro_Ratio_alcohol = Rs_alcohol / Ro_alcohol
