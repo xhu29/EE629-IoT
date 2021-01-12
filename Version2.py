@@ -90,7 +90,7 @@ while True:
         Alcohol, Methane = runController(Ro_alcohol, Ro_methane)
         print ("{:10.4f}".format(Alcohol))
         print ("{:10.4f}".format(Methane))
-        time.sleep(15)
+        time.sleep(3)
 
     except KeyboardInterrupt:
         exit()
