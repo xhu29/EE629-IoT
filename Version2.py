@@ -74,7 +74,7 @@ def runController(Ro_alcohol, Ro_methane):
         Rs_Ro_Ratio_alcohol)) / 0.6413)  # Refer to https://www.nap.edu/read/5435/chapter/11| 1 ppm = 0.00188 mg/L
     Methane = pow(10, (1.0839 - math.log10(
         Rs_Ro_Ratio_methane)) / 0.3601)
-    print('Alcohol = {0:0.4f} ppm'.format(Alcohol), ';', 'Methane = {0:0.4f} ppm'.format(Methane))
+    #print('Alcohol = {0:0.4f} ppm'.format(Alcohol), ';', 'Methane = {0:0.4f} ppm'.format(Methane))
     return Alcohol, Methane
 
 
@@ -83,7 +83,9 @@ Ro_methane = MQCalibration_mq4()
 
 while True: 
     try:
-        runController(Ro_alcohol, Ro_methane)
+        Alcohol, Methane = runController(Ro_alcohol, Ro_methane)
+        print (Alcohol)
+        print (Methane)
         time.sleep(3)
 
     except KeyboardInterrupt:
