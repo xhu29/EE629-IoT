@@ -28,7 +28,6 @@ def readMQ(Vout_alcohol, Vout_methane):
     Vout_alcohol = ReadChannel(channel = 0)
     Vout_methane = ReadChannel(channel = 2)
     return Vout_alcohol, Vout_methane
-print (Vout_alcohol,Vout_methane)
 
 # Calibrate the sensor
 def MQCalibration(Ro_alcohol, Ro_methane):
