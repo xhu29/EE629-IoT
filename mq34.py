@@ -14,32 +14,34 @@ spi.max_speed_hz = 976000
 Vin = 5
 RL_alcohol = 200  # define the load resistance on the board, in kilo ohms
 RL_methane = 20
+
+
 # RL_CO = 10
 # RL_NH3 = 47
 
 def ReadChannel(channel_mq3, channel_mq4):
     adc_mq3 = spi.xfer2([1, (8 + channel_mq3) << 4, 0])
     data_mq3 = ((adc_mq3[1] & 3) << 8) + adc_mq3[2]
-    
+
     adc_mq4 = spi.xfer2([1, (8 + channel_mq4) << 4, 0])
     data_mq4 = ((adc_mq4[1] & 3) << 8) + adc_mq4[2]
     return data_mq3, data_mq4
 
 
 # Function to read sensor connected to MCP3008
-def readMQ():
+def readMQ(channel_mq3, channel_mq4):
     Vout_alcohol = ReadChannel(channel_mq3)
     Vout_methane = ReadChannel(channel_mq4)
     return Vout_alcohol, Vout_methane
 
 
 # Calibrate the sensor
-def MQCalibration():
+def MQCalibration(channel_mq3, channel_mq4):
     val_alcohol = 0.0
     val_methane = 0.0
     for i in range(50):  # take 50 samples
-        val_alcohol += readMQ(Vout_alcohol)
-        val_methane += readMQ(Vout_methane)
+        val_alcohol += readMQ(channel_mq3)
+        val_methane += readMQ(channel_mq4)
         time.sleep(0.2)
     val_alcohol = val_alcohol / 50
     val_methane = val_methane / 50
@@ -61,7 +63,7 @@ def runController(Ro_alcohol, Ro_methane):
     Rs_methane = RL_methane * (Vin * 1023 / Vout_methane - 1)
     Rs_Ro_Ratio_alcohol = Rs_alcohol / Ro_alcohol
     Rs_Ro_Ratio_methane = Rs_methane / Ro_methane
-    Alcohol = 532* pow(10, (-0.2796 - math.log10(
+    Alcohol = 532 * pow(10, (-0.2796 - math.log10(
         Rs_Ro_Ratio_alcohol)) / 0.6413)  # Refer to https://www.nap.edu/read/5435/chapter/11| 1 ppm = 0.00188 mg/L
     Methane = pow(10, (1.0839 - math.log10(
         Rs_Ro_Ratio_methane)) / 0.3601)
@@ -69,8 +71,8 @@ def runController(Ro_alcohol, Ro_methane):
     print('Methane = {0:0.4f} ppm'.format(Methane), ';', 'Rs = {0:0.4f} kohm'.format(Rs_methane))
 
 
-Ro_alcohol = MQCalibration()
-Ro_methane1 = MQCalibration()
+Ro_alcohol = MQCalibration(channel_mq3)
+Ro_methane = MQCalibration(channel_mq4)
 while True:
     try:
         runController(Ro_alcohol, Ro_methane)
