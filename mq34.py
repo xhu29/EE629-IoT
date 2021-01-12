@@ -72,8 +72,8 @@ while True:
         now_time = time.time()
         Time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time()))
         f.write('\nTest_Time:%s' % Time)
-        f.write('\nAlcohol_test:%p' % Alcohol_test)
-        f.write('\nMethane_test:%p' % Methane_test)
+        f.write('\nAlcohol_test:%0.4f' % Alcohol_test)
+        f.write('\nMethane_test:%0.4f' % Methane_test)
         N= N+1
 
         time.sleep(3)
