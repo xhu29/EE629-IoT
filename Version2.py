@@ -84,8 +84,8 @@ Ro_methane = MQCalibration_mq4()
 while True: 
     try:
         Alcohol, Methane = runController(Ro_alcohol, Ro_methane)
-        print (Alcohol)
-        print (Methane)
+        print (%0.4f Alcohol)
+        print (%0.4f Methane)
         time.sleep(3)
 
     except KeyboardInterrupt:
