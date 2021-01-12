@@ -1,7 +1,7 @@
 import time
 import spidev
 import math
-import datatime
+
 
 
 channel_mq3 = 0  # Channel '0' is for MQ3(alcohol) gas sensor.
