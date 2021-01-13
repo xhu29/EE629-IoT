@@ -7,7 +7,7 @@ channel = 0  # Channel '0' is for MQ3(alcohol) gas sensor.
 # Open SPI bus
 spi = spidev.SpiDev()
 spi.open(0, 0)
-spi.max_speed_hz = 976000
+spi.max_speed_hz = 2000000
 
 # Define basic parameters of the sensor
 Vin = 5.0
