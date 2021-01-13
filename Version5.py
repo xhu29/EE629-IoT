@@ -47,7 +47,7 @@ channel_mq136 = 5  # Hydrogen Sulfide
 # Open SPI bus
 spi = spidev.SpiDev()
 spi.open(0, 0)
-spi.max_speed_hz = 2000000
+spi.max_speed_hz = 976000
 
 # Define basic parameters of the sensors
 Vin = 5.0
