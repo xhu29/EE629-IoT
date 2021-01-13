@@ -163,9 +163,6 @@ def MQCalibration_mq136():
     print('Ro_H2S= {0:0.4f} kohm'.format(Ro_H2S))
     return Ro_H2S
 
-def a2d():
-    Vout_digital = ReadMq *(4.9950/1023.0)
-    return Vout_digital
 
 def runController(Ro_alcohol, Ro_methane, Ro_butane, Ro_CO, Ro_H2S):
     Vout_alcohol_vol = ReadMq3()*(4.9950/1023.0)
