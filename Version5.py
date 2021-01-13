@@ -170,8 +170,9 @@ def runController(Ro_alcohol, Ro_methane, Ro_butane, Ro_CO, Ro_H2S):
     Vout_butane = ReadMq6()
     Vout_CO = ReadMq7()
     Vout_H2S = ReadMq136()
+    Vout_alcohol_vol = Vout_alcohol*(4.9950/1023.0)
 
-    Rs_alcohol = RL_alcohol * (4.9950 * 1023 / Vout_alcohol - 1)
+    Rs_alcohol = RL_alcohol * (Vin - Vout_alcohol_vol)/Vout_alcohol_vol
     Rs_methane = RL_methane_butane_H2S * (4.9950 * 1023 / Vout_methane - 1)
     Rs_butane = RL_methane_butane_H2S * (4.9950 * 1023 / Vout_butane - 1)
     Rs_CO = RL_CO * (4.9950 * 1023 / Vout_CO - 1)
