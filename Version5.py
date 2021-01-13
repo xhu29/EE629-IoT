@@ -163,20 +163,22 @@ def MQCalibration_mq136():
     print('Ro_H2S= {0:0.4f} kohm'.format(Ro_H2S))
     return Ro_H2S
 
+def a2d():
+    Vout_digital = ReadMq *(4.9950/1023.0)
+    return Vout_digital
 
 def runController(Ro_alcohol, Ro_methane, Ro_butane, Ro_CO, Ro_H2S):
-    Vout_alcohol = ReadMq3()
-    Vout_methane = ReadMq4()
-    Vout_butane = ReadMq6()
-    Vout_CO = ReadMq7()
-    Vout_H2S = ReadMq136()
-    Vout_alcohol_vol = Vout_alcohol*(4.9950/1023.0)
+    Vout_alcohol_vol = ReadMq3()*(4.9950/1023.0)
+    Vout_methane_vol =  ReadMq4()*(4.9950/1023.0)
+    Vout_butane_vol =  ReadMq6()*(4.9950/1023.0)
+    Vout_CO_vol =  ReadMq7()*(4.9950/1023.0)
+    Vout_H2S_vol =  ReadMq136()*(4.9950/1023.0)
 
     Rs_alcohol = RL_alcohol * (Vin - Vout_alcohol_vol)/Vout_alcohol_vol
-    Rs_methane = RL_methane_butane_H2S * (4.9950 * 1023 / Vout_methane - 1)
-    Rs_butane = RL_methane_butane_H2S * (4.9950 * 1023 / Vout_butane - 1)
-    Rs_CO = RL_CO * (4.9950 * 1023 / Vout_CO - 1)
-    Rs_H2S = RL_methane_butane_H2S * (4.9950 * 1023 / Vout_H2S - 1)
+    Rs_methane = RL_methane_butane_H2S * (Vin - Vout_methane_vol)/Vout_methane_vol
+    Rs_butane = RL_methane_butane_H2S * (Vin - Vout_butane_vol)/Vout_butane_vol
+    Rs_CO = RL_CO * (Vin - Vout_CO_vol)/Vout_CO_vol
+    Rs_H2S = RL_methane_butane_H2S * (Vin - Vout_H2S_vol)/Vout_H2S_vol
 
     Rs_Ro_Ratio_alcohol = Rs_alcohol / Ro_alcohol
     Rs_Ro_Ratio_methane = Rs_methane / Ro_methane
