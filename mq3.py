@@ -45,7 +45,7 @@ def runController(Ro):
     Vout = readMQ()
     Vout_vol = Vout*(4.9950/1023.0) #convert the analog values to voltage
     Rs = RL * (Vin - Vout_vol)/Vout_vol
-    Rs_Ro_Ratio = float (Rs)/float (Ro)
+    Rs_Ro_Ratio = Rs/Ro
     Alcohol = 532 * pow(10, (-0.2796 - math.log10(Rs_Ro_Ratio))/0.6413)
     print('Alcohol = {0:0.4f} ppm'.format(Alcohol), ';', 'Rs_Ro_Ratio = {0:0.4f} kohm'.format(Rs_Ro_Ratio),';''Vout_vol = {0:0.4f} v'.format(Vout_vol))
 
