@@ -10,7 +10,7 @@ import datetime
 # from system_info import get_temperature
 from oauth2client.service_account import ServiceAccountCredentials
 
-GDOCS_OAUTH_JSON = 'machine-olfactory-project-acd23fe11193.json'
+GDOCS_OAUTH_JSON = 'machine-olfactory-project-13367bc49c29.json'
 GDOCS_SPREADSHEET_NAME = 'Machine Olfactory Project'
 FREQUENCY_SECONDS = 5
 
