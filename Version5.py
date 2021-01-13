@@ -201,11 +201,11 @@ def runController(Ro_alcohol, Ro_methane, Ro_butane, Ro_CO, Ro_H2S):
     return Alcohol, Methane, Butane, CO, H2S
 
 
-Ro_alcohol = MQCalibration_mq3()
-Ro_methane = MQCalibration_mq4()
-Ro_butane = MQCalibration_mq6()
-Ro_CO = MQCalibration_mq7()
-Ro_H2S = MQCalibration_mq136()
+#Ro_alcohol = MQCalibration_mq3()
+#Ro_methane = MQCalibration_mq4()
+#Ro_butane = MQCalibration_mq6()
+#Ro_CO = MQCalibration_mq7()
+#Ro_H2S = MQCalibration_mq136()
 
 while True:
     if worksheet is None:
