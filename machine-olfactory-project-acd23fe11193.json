@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "machine-olfactory-project",
+  "private_key_id": "acd23fe11193a5301e8772a27bd8a1d89692c194",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC7ISwwNL1wW/XD\ne1+0/DrKnigLIoBgsFt7gnvNzysY3RHpMXXzZ1/l/ZV6e/DZ9lqw5oW7ggMhSeRV\n6MI8oJeQw4VM03u6Yoqpd1yxTCVQL+Cp8ePZR80jqaujrGaSbRSi8AWu62vQfCQ0\ndWgpMGY2JkqS4Hh9Z5ihowHG5ffxE7pQADIPsBkT8vTsAUOY7Xf+OqPuDTLWIS64\nJcvrJozdSGZMENAd633WCRMBPqRNREJ3uIOzVss7DW8mO6Lf3Tl/QJZxcKCBN+4n\nc7/Z6AqcO5o0RNr6wBb9vsaSPbioqDVW4zju7ajABMrgFgTwN2rrh4cyPOdp11Kw\n38wyfGwBAgMBAAECggEARThjop9XtgDmW72+7PFihAHV+Sx1hY6nAHyHdF2eaQ+Z\nqQOZSITkRey0Rv8i3FWTPZ3AOVjB9KXjN14mv4t+FVgl7oHKYmtCNKbJHHJ42P0k\n42htarnzKa6BJcXHmYGNISqdR5OhKZlKQTdu5NGY9Y3bhxJOr8DLBnuIVD1MJpoN\n6Br5R2t5tjCnlR9TNUbC5cwBoznAOjwseAV8G67rtheFpV1m1HB0qpxnea1h1Duv\nOH77KrNg2c1I4pL2mzmmAcrNDjfckOab6LpPx47CxPj2mVXlBy5qX2OlJD+QyNjX\nW3oPL6ffDmdRK31eKsozlgjwGlCy8D1kvTSVA84RSwKBgQDm53859PzLo2JCs55u\nSI+FV7XuxLAqm6+tm0SNx0tO6LS7srN/8jwGkYJdZrxbS1rkcjL/eaghjskhDj6A\n+J2YZ2GiX31hKrzJROtbLgri56BSDAJChEHaJf/5xOa/y/wu7rWdbNz8CfX6v5CN\nZIXL+LEdL21r9ulii6dvY+yMDwKBgQDPd7jScXwcBG6820OT2gQ3zUI2VXvvtqaX\nqVwNxLNDWfSP6PL+TQfgyvAg7c1bHdkMHdbKIWDG9uB4Gk2TjDVYwLi2S0qrnfBA\nNz9vMhtnFCPf0PzDkV5rf64m4pGAGWFAxhgW/SAGz6luZuBx2M8zXyf6U3rrrPap\nK7ocSr227wKBgG0Q8/uASNg3eHZhOXiGNaSaZYk+xqeZmkW6jYsak+vV52ixZDAP\nT2Ma4CUWHepRkcFOX+BkqpIPS9mdTNDGnkoaqvdze1mmQj4fm7wZ53J+Ti/zFC4v\nIpvUTzC/XO9Dfv78KjUN8uPqIJIsYi8nSDusYJyUhm701hCCPrhSzqzpAoGBAM3L\nBBo7V9Cy1OWg2befWu+/Ox6KTRXLKBToeddudiMo596YQ/DcmCPzKZ6ARGNNiC7s\nqlJ2KXkzChYYgTsKqSAQiyjIJpl1YQtRwiqamXP2Fl+8/f1ABVi8nhMUSx+2DTIj\nTWIAU/RtqLNKePh1B5L9oLo+dH+yYjoMld/ag7UhAoGBAMf6T2nHq6z5HCS/RVXH\nkdhc/G0XWDqv3evBp5fFOnciOm5fGUYxRny2/qidrxv7o+ycUN0BMTWp06R1bXHJ\nEK7J86MdGHVQ/mSAl/4nZIpEHqzsqxsgKm37pCBbigr/WZNa2WsCHS+tDNZf8m1t\nNPwTa7Jl/SgcmZqjPPdjSX31\n-----END PRIVATE KEY-----\n",
+  "client_email": "machine-olfactory-project@machine-olfactory-project.iam.gserviceaccount.com",
+  "client_id": "110640279991751570575",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/machine-olfactory-project%40machine-olfactory-project.iam.gserviceaccount.com"
+}
