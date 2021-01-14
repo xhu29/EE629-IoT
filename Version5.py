@@ -12,7 +12,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 
 GDOCS_OAUTH_JSON = 'machine-olfactory-project-13367bc49c29.json'
 GDOCS_SPREADSHEET_NAME = 'Machine Olfactory Project'
-FREQUENCY_SECONDS = 5
+FREQUENCY_SECONDS = 2
 
 
 def login_open_sheet(oauth_key_file, spreadsheet):
